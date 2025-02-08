@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kindred/screens/login.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class LoginState extends StatefulWidget {
+  const LoginState({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<LoginState> createState() => _LoginStateState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginStateState extends State<LoginState> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
@@ -24,7 +23,7 @@ class _SignUpState extends State<SignUp> {
               color: Colors.white,
               child: const Center(
                 child: Text(
-                  'Who am I',
+                  'Donor Login',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -38,7 +37,7 @@ class _SignUpState extends State<SignUp> {
               width: double.infinity,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30),
                   ),
@@ -49,13 +48,19 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       SizedBox(
                         width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginState()));
-                          },
-                          child: const Text('Donor'),
-                        ),
+                        child: TextFormField(
+                            decoration: const InputDecoration(
+                              fillColor: Colors.white,
+                              labelText: 'Email',
+                        )),
+                      ),
+                      SizedBox(
+                        width: width / 2,
+                        child: TextFormField(
+                            decoration: const InputDecoration(
+                              fillColor: Colors.white,
+                              labelText: 'Password',
+                        )),
                       ),
                       const SizedBox(height: 40),
                       SizedBox(
@@ -63,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                         height: height * .06,
                         child: ElevatedButton(
                           onPressed: () {},
-                          child: const Text('Organization'),
+                          child: const Text('Login'),
                         ),
                       ),
                     ],
