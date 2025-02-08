@@ -9,67 +9,82 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  late TextEditingController _usernameController;
+  late TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: height * .35,
-            width: double.infinity,
-            child: Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text(
-                  'Who am I',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            width: width / 1.3,
+            child: TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.email),
+                fillColor: Colors.white,
+                labelText: 'Email',
+                border: OutlineInputBorder(),
               ),
             ),
           ),
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30),
-                  ),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginState()));
-                          },
-                          child: const Text('Donor'),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Organization'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: width / 1.3,
+            child: TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.password),
+                suffixIcon: Icon(Icons.remove_red_eye),
+                fillColor: Colors.white,
+                labelText: 'Password',
+                border: OutlineInputBorder(),
               ),
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: width / 1.3,
+            child: TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.password),
+                suffixIcon: Icon(Icons.remove_red_eye),
+                fillColor: Colors.white,
+                labelText: 'Reenter password',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          const SizedBox(height: 40),
+          SizedBox(
+            width: width / 2,
+            height: height * .06,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('Sign up'),
             ),
           ),
         ],
