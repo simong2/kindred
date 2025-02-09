@@ -22,6 +22,9 @@ class FirebaseServices {
       _db.collection('users').doc(uid).set({
         'username': username,
       });
+      _db.collection('users').doc(uid).set({
+        'username': email,
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -59,11 +62,19 @@ class FirebaseServices {
     }
   }
 
-  // get username
+  // get donor username
   Future<String> getDonorUsername() async {
     String uid = _auth.currentUser!.uid;
     final ref = await _db.collection('users').doc(uid).get();
     print(ref);
     return ref['username'];
+  }
+
+  // get donor username
+  Future<String> getDonorEmail() async {
+    String uid = _auth.currentUser!.uid;
+    final ref = await _db.collection('users').doc(uid).get();
+    print(ref);
+    return ref['email'];
   }
 }
