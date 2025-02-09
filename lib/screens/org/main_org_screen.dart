@@ -3,7 +3,7 @@ import 'package:kindred/screens/org/orgprofile.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class MainOrgScreen extends StatefulWidget {
-  const MainOrgScreen({Key? key}) : super(key: key);
+  const MainOrgScreen({super.key});
 
   @override
   State<MainOrgScreen> createState() => _MainOrgScreenState();

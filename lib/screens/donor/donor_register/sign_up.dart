@@ -56,9 +56,8 @@ class _SignUpDonorState extends State<SignUpDonor> {
                   labelText: 'Username',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Username is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Username is required' : null,
               ),
             ),
             const SizedBox(height: 15),
@@ -72,9 +71,8 @@ class _SignUpDonorState extends State<SignUpDonor> {
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Email is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Email is required' : null,
               ),
             ),
             const SizedBox(height: 15),
@@ -97,9 +95,8 @@ class _SignUpDonorState extends State<SignUpDonor> {
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Password is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Password is required' : null,
               ),
             ),
             const SizedBox(height: 40),
