@@ -38,7 +38,13 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
             title: _selectedIndex == 0
                 ? const Text("What's Needed?",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25))
+
+                : _selectedIndex == 1
+                    ? const Text('History')
+                    : const Text('Kindred'),
+
                 : const Text('Kindred'),
+
             actions: [
               IconButton(
                 onPressed: () {
@@ -51,7 +57,10 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xFFA3B899),
+
+          backgroundColor: const Color(0xFFA3B899),
+
+
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home_filled, size: 30),
@@ -67,12 +76,21 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
             ),
           ],
           currentIndex: _selectedIndex,
+
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Color(0xFF667B68),
+          onTap: _onItemTapped,
+          iconSize: 40, // Increase the size of the icons
+          selectedFontSize: 1, // Increase the size of the selected label
+          unselectedFontSize: 16, // Increase the size of the unselected label
+
           selectedItemColor: Color(0xFF667B68),
           unselectedItemColor: Color(0xFF667B68),
           onTap: _onItemTapped,
           iconSize: 40,
           selectedFontSize: 1,
           unselectedFontSize: 16,
+
         ));
   }
 }

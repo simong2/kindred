@@ -15,9 +15,18 @@ class DonorEntry extends StatefulWidget {
 class _DonorEntryState extends State<DonorEntry> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 2,
       child: Scaffold(
+        appBar: CustomAppBar(
+          title: "Donor",
+          tabs: [
+            Tab(text: "Log-in"),
+            Tab(text: "Sign-up"),
+          ],
+        ),
+        backgroundColor: Colors.white,
+        body: TabBarView(
         appBar: AppBar(
           backgroundColor: Color(0xFFA3B899),
           foregroundColor: Color(0xFF667B68), // Title and back arrow color
@@ -34,7 +43,7 @@ class _DonorEntryState extends State<DonorEntry> {
           ),
         ),
         backgroundColor: Color(0xFFDDE6D5),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             //Profile(),
             LoginDonor(),

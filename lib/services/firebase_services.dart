@@ -77,10 +77,17 @@ class FirebaseServices {
     return ref['email'];
   }
 
+
+  // specifc org data edit stuff
+  Future<DocumentSnapshot<Map<String, dynamic>>> getSpecifcDonationStuff(
+      String id) async {
+    return await _db.collection('public').doc(id).get();
+
   Future<int> getDonationsCompleted() async {
     String uid = _auth.currentUser!.uid;
     final ref = await _db.collection('users').doc(uid).get();
     return ref['donationsCompleted'];
+
   }
 
   // // find if the logged in user is donor or org
@@ -237,10 +244,9 @@ class FirebaseServices {
         .map(
           (snapshot) => snapshot.docs.map(
             (doc) {
-              // Map<String, dynamic> x = doc.data();
-              // x['id'] = doc.id;
-              // return x;
-              return doc.data();
+              Map<String, dynamic> x = doc.data();
+              x['id'] = doc.id;
+              return x;
             },
           ).toList(),
         );
@@ -279,5 +285,55 @@ class FirebaseServices {
         'quantity': quantity,
       },
     );
+  }
+
+  // get quantity info
+  Future<int> getQuantityPublic(String id) async {
+    final ref = await _db.collection('public').doc(id).get();
+    return ref['quantity'];
+  }
+
+  Future<void> userSentDonationRequest(
+    String id,
+    int amount,
+    String imagePath,
+    String orgName,
+  ) async {
+    String uid = _auth.currentUser!.uid;
+    // get prev quantity amount
+    int x = await getQuantityPublic(id);
+    _db.collection('public').doc(id).update(
+      {
+        'quantity': x - amount,
+      },
+    );
+
+    // create a pending in the users now
+    _db.collection('users').doc(uid).collection('donations').add({
+      'image_path': imagePath,
+      'orgName': orgName,
+      'size': amount,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  // stream the donors history
+  Stream<List<Map<String, dynamic>>> getDonorHistory() {
+    String uid = _auth.currentUser!.uid;
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('donations')
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs.map(
+            (doc) {
+              Map<String, dynamic> x = doc.data();
+              x['id'] = doc.id;
+              return x;
+            },
+          ).toList(),
+        );
   }
 }
