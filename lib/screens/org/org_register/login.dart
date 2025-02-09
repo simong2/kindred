@@ -54,6 +54,7 @@ class _LoginOrgState extends State<LoginOrg> {
                   width: width / 1.3,
                   child: TextFormField(
                     controller: _emailController,
+                    cursorColor: Color(darkGreen),
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email,
                           color: Color(darkGreen)), // Changed icon color
@@ -80,6 +81,7 @@ class _LoginOrgState extends State<LoginOrg> {
                   width: width / 1.3,
                   child: TextFormField(
                     controller: _passwordController,
+                    cursorColor: Color(darkGreen),
                     obscureText: showPassword,
                     decoration: InputDecoration(
                       prefixIcon:
@@ -99,11 +101,16 @@ class _LoginOrgState extends State<LoginOrg> {
                         ),
                       ),
                       labelText: 'Password',
-                      labelStyle: const TextStyle(
-                          color: Color(darkGreen)), // Label text color
-                      border: const OutlineInputBorder(
+                      labelStyle: TextStyle(
+                          color: Color(darkGreen)), // Changed label text color
+                      border: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color(darkGreen)), // Default border color
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(darkGreen),
+                            width: 2.0), // Focused border color and width
                       ),
                     ),
                     validator: (value) =>
