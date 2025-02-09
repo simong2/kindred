@@ -1,16 +1,6 @@
 # kindred
+A Flutter + Firebase mobile application designed to connect homeless shelters with potential donors. Shelters can post requests for essential items, and users can view these requests and commit to donating specific quantities based on their capacity.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack
+- Frontend: Flutter (Dart)
+- Backend: Firebase (Authentication, Firestore Database, Cloud Functions)
