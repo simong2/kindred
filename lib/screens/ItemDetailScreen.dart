@@ -7,6 +7,9 @@ class ItemDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     // Placeholder image if none is provided
     String placeholderImage =
         "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400";
@@ -85,43 +88,31 @@ class ItemDetailScreen extends StatelessWidget {
 
             const Spacer(), // Pushes buttons to bottom
 
-            // Action Buttons with equal sizes
+            // Action Buttons with equal size
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                SizedBox(
+                  width: width / 3,
+                  height: height * .06,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
                       backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(0), // Removed rounded border
-                      ),
                     ),
-                    child: const Text(
-                      "I Pass",
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: const Text('I Pass'),
                   ),
                 ),
                 const SizedBox(width: 10),
-                Expanded(
+                SizedBox(
+                  width: width / 3,
+                  height: height * .06,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
                       backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(0), // Removed rounded border
-                      ),
                     ),
-                    child: const Text(
-                      "Yes, I Want to Donate",
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: const Text('Yes, I Want to Donate'),
                   ),
                 ),
               ],
