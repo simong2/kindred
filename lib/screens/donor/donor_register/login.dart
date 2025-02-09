@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/donor/main_donor_screen.dart';
 import 'package:kindred/services/firebase_services.dart';
+import 'package:kindred/utils/CustomButton.dart';
 
 class LoginDonor extends StatefulWidget {
   const LoginDonor({super.key});
@@ -52,9 +54,8 @@ class _LoginDonorState extends State<LoginDonor> {
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Email is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Email is required' : null,
               ),
             ),
             const SizedBox(height: 15),
@@ -77,16 +78,16 @@ class _LoginDonorState extends State<LoginDonor> {
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Password is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Password is required' : null,
               ),
             ),
             const SizedBox(height: 40),
             SizedBox(
               width: width / 2,
               height: height * .06,
-              child: ElevatedButton(
+              child: CustomButton(
+                label: "Login",
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     print('logging in');
@@ -102,7 +103,6 @@ class _LoginDonorState extends State<LoginDonor> {
                     }
                   }
                 },
-                child: const Text('Log in'),
               ),
             ),
           ],

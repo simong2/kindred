@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/screens/donor/donor_register/login.dart';
 import 'package:kindred/screens/donor/donor_register/sign_up.dart';
+import 'package:kindred/utils/CustomAppBar.dart';
 
 class DonorEntry extends StatefulWidget {
   const DonorEntry({super.key});
@@ -15,15 +16,12 @@ class _DonorEntryState extends State<DonorEntry> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text('Donor'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
-            ],
-          ),
+        appBar: CustomAppBar(
+          title: "Donor",
+          tabs: const [
+            Tab(text: "Log-in"),
+            Tab(text: "Sign-up"),
+          ],
         ),
         backgroundColor: Colors.white,
         body: const TabBarView(

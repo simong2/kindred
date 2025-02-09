@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/services/firebase_services.dart';
 
+const darkGreen = 0xFF667B68;
+const mediumGreen = 0xFFA3B899;
+const lightGreen = 0xFFDDE6D5; // Define the darkGreen color constant
+
 class LoginOrg extends StatefulWidget {
   const LoginOrg({super.key});
 
@@ -46,14 +50,18 @@ class _LoginOrgState extends State<LoginOrg> {
               child: TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.email,
+                      color: Color(darkGreen)), // Changed icon color
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                      color: Color(darkGreen)), // Changed label text color
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(darkGreen)), // Default border color
+                  ),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Email is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Email is required' : null,
               ),
             ),
             const SizedBox(height: 15),
@@ -63,22 +71,29 @@ class _LoginOrgState extends State<LoginOrg> {
                 controller: _passwordController,
                 obscureText: showPassword,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.password),
+                  prefixIcon: const Icon(Icons.lock,
+                      color: Color(darkGreen)), // Lock icon color
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
                       });
                     },
-                    icon: const Icon(Icons.remove_red_eye),
+                    icon: Icon(
+                      showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Color(darkGreen), // Eye icon color
+                    ),
                   ),
-                  fillColor: Colors.white,
                   labelText: 'Password',
-                  border: const OutlineInputBorder(),
+                  labelStyle:
+                      const TextStyle(color: Color(darkGreen)), // Label text color
+                  border: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(darkGreen)), // Default border color
+                  ),
                 ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Password is required'
-                    : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Password is required' : null,
               ),
             ),
             const SizedBox(height: 40),
@@ -86,6 +101,15 @@ class _LoginOrgState extends State<LoginOrg> {
               width: width / 2,
               height: height * .06,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(mediumGreen),
+                  foregroundColor: Color(darkGreen), // Text color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    side: const BorderSide(
+                        color: Color(darkGreen)),
+                  ),
+                ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     print('logging in');
