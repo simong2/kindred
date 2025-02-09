@@ -16,18 +16,18 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFDDE6D5),
       body: Column(
         children: [
           SizedBox(
             height: height * .35,
             width: double.infinity,
             child: Container(
-              color: Colors.white,
               child: const Center(
                 child: Text(
-                  'Who am I',
+                  'kindred',
                   style: TextStyle(
+                    color: const Color(0xFF667B68),
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
@@ -39,12 +39,12 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
             child: SizedBox(
               width: double.infinity,
               child: Container(
-                decoration: const BoxDecoration(
+                /*decoration: const BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30),
-                  ),
-                ),
+                  ),  
+                ),*/
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -53,6 +53,15 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         width: width / 2,
                         height: height * .06,
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFFA3B899), // Button background color
+                            foregroundColor: Color(0xFF667B68),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                              side: const BorderSide(color: const Color(0xFF667B68), width: 2),
+                            ),
+                            textStyle: const TextStyle(fontSize: 18),
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -68,6 +77,15 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         width: width / 2,
                         height: height * .06,
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFFA3B899), // Button background color
+                            foregroundColor: Color(0xFF667B68),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                              side: const BorderSide(color: const Color(0xFF667B68), width: 2),
+                            ),
+                            textStyle: const TextStyle(fontSize: 18),
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
