@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kindred/screens/donor/donor_entry.dart';
 import 'package:kindred/screens/org/org_entry.dart';
 import 'package:kindred/screens/org/org_register/login.dart';
+import 'package:kindred/utils/CustomButton.dart';
 
 class SelectWhoScreen extends StatefulWidget {
   const SelectWhoScreen({super.key});
@@ -52,18 +53,8 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                       SizedBox(
                         width: width / 2,
                         height: height * .06,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Color(0xFFA3B899), // Button background color
-                            foregroundColor: Color(0xFF667B68),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              side: const BorderSide(
-                                  color: const Color(0xFF667B68), width: 2),
-                            ),
-                            textStyle: const TextStyle(fontSize: 18),
-                          ),
+                        child: CustomButton(
+                          label: "Donor",
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -71,7 +62,6 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                                   builder: (context) => const DonorEntry()),
                             );
                           },
-                          child: const Text('Donor'),
                         ),
                       ),
                       const SizedBox(height: 40),
