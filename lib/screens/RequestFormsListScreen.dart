@@ -33,10 +33,10 @@ class RequestFormsListScreen extends StatelessWidget {
           "assets/img/l4.png",
           "assets/img/l5.png",
           "assets/img/l6.png",
-          "https://example.com/image7.jpg",
-          "https://example.com/image8.jpg",
-          "https://example.com/image9.jpg",
-          "https://example.com/image10.jpg",
+          "assets/img/l7.png",
+          "assets/img/l8.png",
+          "assets/img/l9.png",
+          "assets/img/l10.png",
         ];
 
         // Assign a category cyclically
@@ -87,6 +87,7 @@ class RequestFormsListScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
               children: [
+                // Image Container
                 Container(
                   margin: const EdgeInsets.all(8.0),
                   width: 100, // Increased width
@@ -113,26 +114,82 @@ class RequestFormsListScreen extends StatelessWidget {
                       : const Center(
                           child: Icon(Icons.broken_image, color: Colors.red)),
                 ),
+
+                // Text Information Container
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Category: ${item['category']}",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Category and Item Name with Chevron in between
+                        Row(
+                          children: [
+                            Text(
+                              item['category'],
+                              style: const TextStyle(
+                                fontSize: 17, // Increased by 1em (from 16px)
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            const Icon(Icons.chevron_right,
+                                size: 18, color: Colors.grey),
+                            const SizedBox(width: 5),
+                            Expanded(
+                              child: Text(
+                                item['item_name'],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text("Item Name: ${item['item_name']}"),
-                      Text("Date Posted: ${item['date_posted']}"),
-                      Text("Status: ${item['status']}"),
-                      Text("Organization: ${item['organization']}"),
-                    ],
+                        const SizedBox(height: 4),
+
+                        // Date Posted
+                        Row(
+                          children: [
+                            const Icon(Icons.calendar_today,
+                                size: 16, color: Colors.grey),
+                            const SizedBox(width: 5),
+                            Text(
+                              "Posted: ${item['date_posted']}",
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+
+                        // Organization
+                        Row(
+                          children: [
+                            const Icon(Icons.business,
+                                size: 16, color: Colors.grey),
+                            const SizedBox(width: 5),
+                            Text(
+                              "From: ${item['organization']}",
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+
+                // Navigation Icon
                 IconButton(
-                  icon: const Icon(Icons.arrow_forward),
+                  icon: const Icon(Icons.arrow_forward_ios,
+                      size: 20, color: Colors.blue),
                   onPressed: () {
                     Navigator.push(
                       context,
