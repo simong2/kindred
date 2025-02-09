@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindred/screens/login.dart';
+import 'package:kindred/screens/organisation/orglogin.dart';
 
 class SelectWhoScreen extends StatefulWidget {
   const SelectWhoScreen({super.key});
@@ -84,7 +85,14 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                     width: width / 3,
                     height: height * .06,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OrgLoginState(),
+                          ),
+                        );
+                      },
                       child: const Text('Organization'),
                     ),
                   ),

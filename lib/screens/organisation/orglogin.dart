@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kindred/screens/main_org_screen.dart';
-import 'package:kindred/screens/orgsign_up.dart';
+import 'package:kindred/screens/organisation/main_org_screen.dart';
+import 'package:kindred/screens/organisation/orgsign_up.dart';
 import 'package:kindred/screens/sign_up.dart';
 
 class OrgLoginState extends StatefulWidget {
@@ -85,10 +85,12 @@ class _LoginStateState extends State<OrgLoginState> {
                   width: width / 2,
                   height: height * .06,
                   child: ElevatedButton(
-                    onPressed: () {Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainOrgScreen()));},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainOrgScreen()));
+                    },
                     child: const Text('Log in'),
                   ),
                 ),
