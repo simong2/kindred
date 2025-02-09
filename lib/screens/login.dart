@@ -9,7 +9,7 @@ class LoginState extends StatefulWidget {
 }
 
 class _LoginStateState extends State<LoginState> {
-  late TextEditingController _usernameController;
+  late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
   final _formKey = GlobalKey<FormState>();
@@ -18,14 +18,14 @@ class _LoginStateState extends State<LoginState> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -43,7 +43,7 @@ class _LoginStateState extends State<LoginState> {
             SizedBox(
               width: width / 1.3,
               child: TextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   fillColor: Colors.white,
@@ -83,7 +83,7 @@ class _LoginStateState extends State<LoginState> {
                     print('logging in');
                     try {
                       FirebaseServices().logIn(
-                        _usernameController.text,
+                        _emailController.text,
                         _passwordController.text,
                       );
                       Navigator.pop(context);

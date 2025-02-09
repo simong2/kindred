@@ -9,8 +9,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  late TextEditingController _usernameController;
+  late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  late TextEditingController _usernameController;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -18,15 +19,17 @@ class _SignUpState extends State<SignUp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _usernameController = TextEditingController();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -45,6 +48,22 @@ class _SignUpState extends State<SignUp> {
               width: width / 1.3,
               child: TextFormField(
                 controller: _usernameController,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.person),
+                  fillColor: Colors.white,
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => value!.isEmpty || value == null
+                    ? 'Username is required'
+                    : null,
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: width / 1.3,
+              child: TextFormField(
+                controller: _emailController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   fillColor: Colors.white,
@@ -81,11 +100,12 @@ class _SignUpState extends State<SignUp> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print('account created');
                     try {
+                      print('account created');
                       FirebaseServices().createUser(
-                        _usernameController.text,
+                        _emailController.text,
                         _passwordController.text,
+                        _usernameController.text,
                       );
                       Navigator.pop(context);
                     } catch (e) {
