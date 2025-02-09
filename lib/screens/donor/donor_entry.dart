@@ -36,8 +36,8 @@ class _DonorEntryState extends State<DonorEntry> {
         backgroundColor: Color(0xFFDDE6D5),
         body: const TabBarView(
           children: [
-            Profile(),
-            //LoginDonor(),
+            //Profile(),
+            LoginDonor(),
             SignUpDonor(),
           ],
         ),
