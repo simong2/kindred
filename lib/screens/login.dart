@@ -46,11 +46,40 @@ class _LoginStateState extends State<LoginState> {
               letterSpacing: 1.2, // Adds slight spacing for better readability
             ),
           ),
+          leading: IconButton(
+            icon: const Icon(Icons.chevron_left,
+                color: Colors.white, size: 32), // Chevron icon in white
+            onPressed: () {
+              Navigator.pop(context); // Go back when pressed
+            },
+          ),
 
           bottom: const TabBar(
+            labelColor: Colors.white, // White text color for selected tab
+            unselectedLabelColor:
+                Colors.white70, // Dimmed white for unselected tabs
+            indicatorColor: Colors.white, // White underline indicator
             tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
+              Tab(
+                child: Text(
+                  'LOG-IN',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2, // Improves readability
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'SIGN-UP',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

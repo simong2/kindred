@@ -66,6 +66,13 @@ flutter:
   assets:
     - .env
     - lib/img/kindred-bg-logo.png
+    - assets/img/kd-connect.png
+    - assets/img/l1.png
+    - assets/img/l2.png
+    - assets/img/l3.png
+    - assets/img/l4.png
+    - assets/img/l5.png
+    - assets/img/l6.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kindred/screens/ItemDetailScreen.dart';
 import 'package:kindred/screens/sign_up.dart';
 
 class RequestFormsListScreen extends StatelessWidget {
@@ -8,26 +9,73 @@ class RequestFormsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> items = List.generate(
-        50,
-        (index) => {
-              "category": index % 2 == 0 ? "Clothing" : "Footwear",
-              "item_name": index % 2 == 0 ? "Shirt $index" : "Sneakers $index",
-              "date_posted": "${index + 1} m ago",
-              "status": "Pending",
-              "organization": "Organization $index",
-              "image": index % 3 == 0 ? null : "https://via.placeholder.com/150"
-            });
+      50,
+      (index) {
+        // Define categories
+        List<String> categories = [
+          "Clothing",
+          "Footwear",
+          "Accessories",
+          "Electronics",
+          "Books",
+          "Home Decor",
+          "Toys",
+          "Sports Equipment",
+          "Beauty",
+          "Kitchenware"
+        ];
+
+        // Define different image URLs (mix of local assets & web URLs)
+        List<String> imageUrls = [
+          "assets/img/l1.png",
+          "assets/img/l2.png",
+          "assets/img/l3.png",
+          "assets/img/l4.png",
+          "assets/img/l5.png",
+          "assets/img/l6.png",
+          "https://example.com/image7.jpg",
+          "https://example.com/image8.jpg",
+          "https://example.com/image9.jpg",
+          "https://example.com/image10.jpg",
+        ];
+
+        // Assign a category cyclically
+        String category = categories[index % categories.length];
+
+        // Assign a unique item name
+        String itemName = "$category Item $index";
+
+        // Assign an image dynamically
+        String? image =
+            index % 3 == 0 ? null : imageUrls[index % imageUrls.length];
+
+        return {
+          "category": category,
+          "item_name": itemName,
+          "date_posted": "${index + 1} m ago",
+          "status": "Pending",
+          "organization": "Organization $index",
+          "image": image,
+        };
+      },
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Shelters Requests".toUpperCase(), // Uppercase title
+          "Current Requests".toUpperCase(),
           style: const TextStyle(
-            color: Colors.white, // White color
+            color: Colors.white,
             fontSize: 20,
-            fontWeight: FontWeight.w600, // Semi-bold for a refined look
-            letterSpacing: 1.2, // Adds slight spacing for better readability
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.2,
           ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.chevron_left, color: Colors.white, size: 32),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         backgroundColor: Colors.blue,
       ),
@@ -41,29 +89,29 @@ class RequestFormsListScreen extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.all(8.0),
-                  width: 70,
-                  height: 70,
+                  width: 100, // Increased width
+                  height: 100, // Increased height
                   decoration: BoxDecoration(
                     color: item['image'] == null
                         ? Colors.transparent
                         : const Color(0xFF80BFFF),
-                    border: Border.all(
-                      color: item['image'] == null
-                          ? Colors.red
-                          : Colors.transparent,
-                      width: 2,
-                    ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: item['image'] != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            item['image']!,
-                            fit: BoxFit.cover,
-                          ),
+                          child: item['image']!.startsWith('http')
+                              ? Image.network(
+                                  item['image']!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  item['image']!,
+                                  fit: BoxFit.cover,
+                                ),
                         )
-                      : null,
+                      : const Center(
+                          child: Icon(Icons.broken_image, color: Colors.red)),
                 ),
                 Expanded(
                   child: Column(
@@ -111,189 +159,6 @@ class RequestFormsListScreen extends StatelessWidget {
           height: 50,
           alignment: Alignment.center,
           child: const Text("Pull to refresh or tap the button above."),
-        ),
-      ),
-    );
-  }
-}
-
-class ItemDetailScreen extends StatelessWidget {
-  final Map<String, dynamic> item;
-
-  const ItemDetailScreen({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          (item['item_name'] ?? "Item Details")
-              .toUpperCase(), // Ensures uppercase text
-          style: GoogleFonts.roboto(
-            color: Colors.white, // White color for contrast
-            fontSize: 20,
-            fontWeight: FontWeight.w600, // Semi-bold for a refined look
-            letterSpacing: 1.2, // Adds slight spacing for better readability
-          ),
-        ),
-        backgroundColor: Colors.blue,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                color: item['image'] == null
-                    ? Colors.transparent
-                    : const Color(0xFF80BFFF),
-                border: Border.all(
-                  color:
-                      item['image'] == null ? Colors.red : Colors.transparent,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: item['image'] != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        item['image']!,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : null,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              "Category: ${item['category']}",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text("Item Name: ${item['item_name']}"),
-            Text("Date Posted: ${item['date_posted']}"),
-            Text("Status: ${item['status']}"),
-            Text("Organization: ${item['organization']}"),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LoginState extends StatefulWidget {
-  const LoginState({super.key});
-
-  @override
-  State<LoginState> createState() => _LoginStateState();
-}
-
-class _LoginStateState extends State<LoginState> {
-  late TextEditingController _usernameController;
-  late TextEditingController _passwordController;
-
-  @override
-  void initState() {
-    super.initState();
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text('Donor'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
-            ],
-          ),
-        ),
-        backgroundColor: Colors.white,
-        body: TabBarView(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Container(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: width / 1.3,
-                              child: TextField(
-                                controller: _usernameController,
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.email),
-                                  fillColor: Colors.white,
-                                  labelText: 'Email',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            SizedBox(
-                              width: width / 1.3,
-                              child: TextField(
-                                controller: _passwordController,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.password),
-                                  suffixIcon: Icon(Icons.remove_red_eye),
-                                  fillColor: Colors.white,
-                                  labelText: 'Password',
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 40),
-                            SizedBox(
-                              width: width / 2,
-                              height: height * .06,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const RequestFormsListScreen()));
-                                },
-                                child: const Text('Log in'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SignUp(),
-          ],
         ),
       ),
     );
