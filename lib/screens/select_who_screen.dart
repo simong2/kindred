@@ -13,69 +13,62 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(
-            height: height * .35,
-            width: double.infinity,
-            child: Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text(
-                  'Who am I',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF80BFFF), // Light Carolina Blue
+              Color(0xFF0066CC), // Deeper Blue
+            ],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome to Kinder App',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: width / 3,
+                    height: height * .06,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginState()));
+                      },
+                      child: const Text('Donor'),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginState()));
-                          },
-                          child: const Text('Donor'),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Organization'),
-                        ),
-                      ),
-                    ],
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: width / 3,
+                    height: height * .06,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Organization'),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
