@@ -19,6 +19,8 @@ class _ProfileState extends State<Profile> {
 
   late Future<String> _email;
 
+  late Future<String> _rank;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,8 @@ class _ProfileState extends State<Profile> {
   void getUserInfo() async{
     _username = FirebaseServices().getDonorUsername();
     _email = FirebaseServices().getDonorEmail();
+    // _rank = FirebaseServices().getDonorRank()
+    _rank = FirebaseServices().getDonorUsername();
   }
 
   @override
@@ -52,7 +56,19 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     const SizedBox(height: 30),
-                    const ProfileHeading(label: "User Details"),
+                    const Row(
+                      children: [
+                        SizedBox(width: 40),
+                        Text(
+                          "User Details",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
                     Divider(
                       color: Colors.black,
                       indent: width * 0.05,
@@ -64,7 +80,7 @@ class _ProfileState extends State<Profile> {
                       future: _username, 
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return UserInfoRow(label: "Username", value: snapshot.data!);
+                          return userInfoRow("Username", snapshot.data!);
                         } else {
                           return const Text("Loading ...");
                         }
@@ -75,22 +91,46 @@ class _ProfileState extends State<Profile> {
                       future: _email, 
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return UserInfoRow(label: "Email", value: snapshot.data!);
+                          return userInfoRow("Email", snapshot.data!);
                         } else {
                           return const Text("Loading ...");
                         }
                       }
                     ),
                    
-                    const SizedBox(height: 30),
-                    const ProfileHeading(label: "My Rank"),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.1,
+                     
+                    ),
+                    const Row(
+                      children: [
+                        SizedBox(width: 40),
+                        Text(
+                          "My Rank",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
                     Divider(
                       color: Colors.black,
                       indent: width * 0.05,
                       endIndent: width * 0.05,
                     ),
                     const SizedBox(height: 10),
-                    const UserInfoRow(label: "Rank", value: "??"),
+                    FutureBuilder(
+                      future: _rank, 
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return userInfoRow("Rank", snapshot.data!);
+                        } else {
+                          return const Text("Loading ...");
+                        }
+                      }
+                    ),
                     const SizedBox(height: 10),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 0.1),
@@ -101,17 +141,6 @@ class _ProfileState extends State<Profile> {
                         minHeight: 10,
                       ),
                     ),
-                    SizedBox (
-                      height: MediaQuery.sizeOf(context).height * 0.45,
-                    ),
-                    ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue.shade200,
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: onPressed, 
-                          child: Text("Sign Out"),
-                    )
                   ],
                   
                 ),
@@ -125,54 +154,8 @@ class _ProfileState extends State<Profile> {
 }
 
 
-Widget userInfoRow(label) {
+Widget userInfoRow(label, value) {
   return Row(
-      children: [
-        const SizedBox(width: 40),
-        Text(
-          "$label: ",
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(150, 0, 0, 0),
-          ),
-          textAlign: TextAlign.left,
-        ),
-      ],
-    );
-}
-class ProfileHeading extends StatelessWidget {
-  final String label;
-
-  const ProfileHeading({Key? key, required this.label}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(width: 40),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.left,
-        ),
-      ],
-    );
-  }
-}
-
-class UserInfoRow extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const UserInfoRow({Key? key, required this.label, required this.value}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
       children: [
         const SizedBox(width: 40),
         Text(
@@ -186,5 +169,4 @@ class UserInfoRow extends StatelessWidget {
         ),
       ],
     );
-  }
 }
