@@ -102,7 +102,17 @@ class _ProfileState extends State<Profile> {
                         minHeight: 10,
                       ),
                     ),
-                    
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.45,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade200,
+                        foregroundColor: Colors.black,
+                      ),
+                      onPressed: onPressed,
+                      child: const Text("Sign Out"),
+                    )
                   ],
                 ),
               ),
@@ -134,16 +144,16 @@ Widget userInfoRow(label) {
 class ProfileHeading extends StatelessWidget {
   final String label;
 
-  const ProfileHeading({Key? key, required this.label}) : super(key: key);
+  const ProfileHeading({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 40),
+        const SizedBox(width: 40),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
           ),
@@ -158,8 +168,7 @@ class UserInfoRow extends StatelessWidget {
   final String label;
   final String value;
 
-  const UserInfoRow({Key? key, required this.label, required this.value})
-      : super(key: key);
+  const UserInfoRow({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
