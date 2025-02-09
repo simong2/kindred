@@ -26,6 +26,7 @@ class _OrgHomeState extends State<OrgHome> {
           var result = snapshot.data!;
           // print(result);
           return ListView.separated(
+            padding: const EdgeInsets.only(top: 10),
             itemCount: result.length,
             itemBuilder: (context, index) {
               final currItem = result[index];
@@ -42,33 +43,39 @@ class _OrgHomeState extends State<OrgHome> {
                     ),
                   );
                 },
-                child: SizedBox(
-                  height: height / 6,
-                  child: Card(
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          flex: 2,
-                          child: Image.asset(currItem['image_path']),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                currItem['itemDesc'],
-                              ),
-                              Text(
-                                'Quantity: ${currItem['quantity'].toString()}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 30),
-                              ),
-                            ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    height: height / 6,
+                    child: Card(
+                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Image.asset(currItem['image_path'], scale: 2),
                           ),
-                        )
-                      ],
+                          SizedBox(width: 10),
+                          Flexible(
+                            flex: 3,
+                            child: Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    currItem['itemDesc'],
+                                  ),
+                                  Text(
+                                    'Quantity: ${currItem['quantity'].toString()}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
