@@ -32,98 +32,135 @@ class _DonorSpecifcItemState extends State<DonorSpecifcItem> {
     double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xF0DDe6d5),
+        backgroundColor: const Color(0xFFDDe6d5),
         title: const Text('Request To Donate'),
       ),
       backgroundColor: const Color(0xF0DDe6d5),
-      body: Column(
-        children: [
-          FutureBuilder(
-            future: _itemFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const Center(
-                  child: Text('Error loading data'),
-                );
-              } else {
-                final data = snapshot.data!;
-                return Column(
-                  children: [
-                    Text('${data['orgName']} left a description: '),
-                    Text(data['itemDesc']),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Item Picture: '),
-                        const SizedBox(width: 20),
-                        SizedBox(
-                          height: height * .15,
-                          child: Image.asset(
-                            data['image_path'],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Qt: ${data['quantity']}",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: height * .20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('How much would you like to donate?'),
-                        const SizedBox(width: 10),
-                        DropdownButton<int>(
-                          value: _selectedNumber,
-                          onChanged: (int? val) {
-                            setState(() {
-                              _selectedNumber = val!;
-                            });
-                          },
-                          items: List.generate(
-                            data['quantity'],
-                            (index) => DropdownMenuItem<int>(
-                              value: index + 1,
-                              child: Text((index + 1).toString()),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            FutureBuilder(
+              future: _itemFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Error loading data'),
+                  );
+                } else {
+                  final data = snapshot.data!;
+                  return Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(0, 3),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: height * .20,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        FirebaseServices().userSentDonationRequest(
-                          widget.id,
-                          _selectedNumber,
-                          data['image_path'],
-                          data['orgName'],
-                        );
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Thank you for your contributions!'),
-                          ),
-                        );
-                      },
-                      child: const Text('Submit request'),
-                    )
-                  ],
-                );
-              }
-            },
-          ),
-        ],
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: height * 0.05),
+                            Text(
+                                '${data['orgName'].toUpperCase()} left a description: '),
+                            Text(data['itemDesc']),
+                            SizedBox(height: height * 0.05),
+                            Image.asset(
+                              scale: 1.5,
+                              data['image_path'],
+                            ),
+                            SizedBox(height: height * 0.05),
+                            Text(
+                              "Qt: ${data['quantity']}",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Address: ${data['quantity']}",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: height * .05,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                    'How much would you like to donate?'),
+                                const SizedBox(width: 10),
+                                DropdownButton<int>(
+                                  value: _selectedNumber,
+                                  onChanged: (int? val) {
+                                    setState(() {
+                                      _selectedNumber = val!;
+                                    });
+                                  },
+                                  items: List.generate(
+                                    data['quantity'],
+                                    (index) => DropdownMenuItem<int>(
+                                      value: index + 1,
+                                      child: Text((index + 1).toString()),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(
+                                    0xFFA3B899), // Button background color
+                                foregroundColor:
+                                    const Color(0xFF667B68), // Text color
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: const BorderSide(
+                                      color: Color(0xFF667B68),
+                                      width: 2), // Border
+                                ),
+                                textStyle: const TextStyle(fontSize: 18),
+                              ),
+                              onPressed: () {
+                                FirebaseServices().userSentDonationRequest(
+                                  widget.id,
+                                  _selectedNumber,
+                                  data['image_path'],
+                                  data['orgName'],
+                                );
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Thank you for your contributions!'),
+                                  ),
+                                );
+                              },
+                              child: const Text('Submit request'),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
