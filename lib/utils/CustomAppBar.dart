@@ -6,6 +6,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackPressed;
   final List<Tab>? tabs; // ✅ Optional TabBar
 
+  static const darkGreen = 0xFF667B68;
+  static const mediumGreen = 0xFFA3B899;
+  static const lightGreen = 0xFFDDE6D5;
+
   const CustomAppBar(
       {Key? key, required this.title, this.onBackPressed, this.tabs})
       : super(key: key);
@@ -20,13 +24,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onTap: onBackPressed ??
                 () => Navigator.pop(context), // ✅ Default back action
             child: const Icon(Icons.chevron_left,
-                color: Colors.white, size: 28), // ✅ White chevron icon
+                color: Color(darkGreen), size: 28), // ✅ White chevron icon
           ),
           const SizedBox(width: 8), // Space between icon and text
           Text(
             title,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Color(darkGreen),
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),
