@@ -44,13 +44,6 @@ class _LoginStateState extends State<LoginState> {
               fontSize: 20,
               fontWeight: FontWeight.w600, // Semi-bold for a refined look
               letterSpacing: 1.2, // Adds slight spacing for better readability
-              shadows: [
-                Shadow(
-                  offset: Offset(1, 1), // Light shadow for depth
-                  blurRadius: 3,
-                  //color: Colors.black.withOpacity(0.3), // Subtle shadow effect
-                ),
-              ],
             ),
           ),
 
