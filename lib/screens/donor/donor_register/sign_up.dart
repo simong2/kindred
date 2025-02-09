@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/services/firebase_services.dart';
+import 'package:kindred/utils/CustomButton.dart';
 
 class SignUpDonor extends StatefulWidget {
   const SignUpDonor({super.key});
@@ -101,28 +102,27 @@ class _SignUpDonorState extends State<SignUpDonor> {
             ),
             const SizedBox(height: 40),
             SizedBox(
-              width: width / 2,
-              height: height * .06,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    try {
-                      print('account created');
-                      FirebaseServices().createDonor(
-                        _emailController.text,
-                        _passwordController.text,
-                        _usernameController.text,
-                      );
-                      Navigator.pop(context);
-                    } catch (e) {
-                      print('account account creation failed');
-                      print(e.toString());
+                width: width / 2,
+                height: height * .06,
+                child: CustomButton(
+                  label: 'Sign Up',
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      try {
+                        print('account created');
+                        FirebaseServices().createDonor(
+                          _emailController.text,
+                          _passwordController.text,
+                          _usernameController.text,
+                        );
+                        Navigator.pop(context);
+                      } catch (e) {
+                        print('account account creation failed');
+                        print(e.toString());
+                      }
                     }
-                  }
-                },
-                child: const Text('Sign up'),
-              ),
-            ),
+                  },
+                )),
           ],
         ),
       ),

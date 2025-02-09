@@ -31,48 +31,48 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
     double height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      backgroundColor: Color(0xF0DDe6d5),
-      appBar: AppBar(
-        centerTitle: true,
         backgroundColor: Color(0xF0DDe6d5),
-        title: _selectedIndex == 0 ? 
-        const Text("What's Needed?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)) : 
-        const Text('Kindred'),
-        actions: [
-          IconButton(
-          onPressed: () {
-            FirebaseServices().signOut();
-          },
-          icon: const Icon(Icons.logout),
-          )
-        ]),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFFA3B899),
-        items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled, size: 30),
-          label: '',
+        appBar: AppBar(
+            centerTitle: true,
+            backgroundColor: Color(0xF0DDe6d5),
+            title: _selectedIndex == 0
+                ? const Text("What's Needed?",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25))
+                : const Text('Kindred'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  FirebaseServices().signOut();
+                },
+                icon: const Icon(Icons.logout),
+              )
+            ]),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.view_list, size: 30),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person, size: 30),
-          label: '',
-        ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Color(0xFF667B68),
-        onTap: _onItemTapped,
-        iconSize: 40, // Increase the size of the icons
-        selectedFontSize: 1, // Increase the size of the selected label
-        unselectedFontSize: 16, // Increase the size of the unselected label
-      )
-      );
-    }
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color(0xFFA3B899),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled, size: 30),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.view_list, size: 30),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, size: 30),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color(0xFF667B68),
+          unselectedItemColor: Color(0xFF667B68),
+          onTap: _onItemTapped,
+          iconSize: 40,
+          selectedFontSize: 1,
+          unselectedFontSize: 16,
+        ));
+  }
 }
