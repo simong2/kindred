@@ -6,8 +6,9 @@ import 'package:kindred/services/firebase_services.dart';
 class UserTypeProvider extends StatefulWidget {
   final String uid;
   const UserTypeProvider({required this.uid, super.key});
+
   @override
-  State<UserTypeProvider> createState() => _UserTypeProviderState();
+  _UserTypeProviderState createState() => _UserTypeProviderState();
 }
 
 class _UserTypeProviderState extends State<UserTypeProvider> {

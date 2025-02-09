@@ -127,6 +127,7 @@ class FirebaseServices {
         'address': orgAddy,
         'zipcode': orgZip,
         'phoneNumber': orgPhone,
+        'isOrg': true,
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -162,55 +163,5 @@ class FirebaseServices {
     String uid = _auth.currentUser!.uid;
     final ref = await _db.collection('orgs').doc(uid).get();
     return ref['orgName'];
-  }
-
-  // post org requesting item
-  Future<void> postOrgItem(
-    String imgPath,
-    String itemDesc,
-    String quantity,
-  ) async {
-    int q = int.parse(quantity); // input should always be int
-
-    String uid = _auth.currentUser!.uid;
-    _db.collection('orgs').doc(uid).collection('items').add(
-      {
-        'image_path': imgPath,
-        'itemDesc': itemDesc,
-        'quantity': q,
-      },
-    );
-
-    _db.collection('public').add(
-      {
-        'image_path': imgPath,
-        'itemDesc': itemDesc,
-        'quantity': q,
-      },
-    );
-  }
-
-  // stream the orgs posts
-  Stream<List<Map<String, dynamic>>> getOrgItems() {
-    String uid = _auth.currentUser!.uid;
-    return _db.collection('orgs').doc(uid).collection('items').snapshots().map(
-          (snapshot) => snapshot.docs.map(
-            (doc) {
-              return doc.data();
-            },
-          ).toList(),
-        );
-  }
-
-  // stream the public org posts
-  Stream<List<Map<String, dynamic>>> getPublicOrgItem() {
-    String uid = _auth.currentUser!.uid;
-    return _db.collection('public').snapshots().map(
-          (snapshot) => snapshot.docs.map(
-            (doc) {
-              return doc.data();
-            },
-          ).toList(),
-        );
   }
 }
