@@ -51,7 +51,7 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.list),
             label: 'My Requests',
           ),
           BottomNavigationBarItem(
