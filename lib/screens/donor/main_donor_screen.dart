@@ -3,7 +3,7 @@ import 'package:kindred/screens/donor/profile.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class MainDonorScreen extends StatefulWidget {
-  const MainDonorScreen({Key? key}) : super(key: key);
+  const MainDonorScreen({super.key});
 
   @override
   State<MainDonorScreen> createState() => _MainDonorScreenState();
