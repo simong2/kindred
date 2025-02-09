@@ -53,22 +53,23 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
         backgroundColor: Color(0xFFA3B899),
         items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home, size: 30),
+          icon: Icon(Icons.home_filled, size: 30),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.list, size: 30),
+          icon: Icon(Icons.view_list, size: 30),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outlined, size: 30),
+          icon: Icon(Icons.person, size: 30),
           label: '',
         ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
+        unselectedItemColor: Color(0xFF667B68),
         onTap: _onItemTapped,
-        iconSize: 40, // Increase the size of the icons
+        iconSize: 30, // Increase the size of the icons
         selectedFontSize: 20, // Increase the size of the selected label
         unselectedFontSize: 16, // Increase the size of the unselected label
       )

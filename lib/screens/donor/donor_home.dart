@@ -24,7 +24,7 @@ class _DonorHomeState extends State<DonorHome> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No requests available"));
+            return const Center(child: Text("No requests are open at the moment."));
           } else  {
 
             List<Map<String, dynamic>> orgItems = snapshot.data!;
@@ -51,33 +51,57 @@ class _DonorHomeState extends State<DonorHome> {
                   borderRadius: BorderRadius.circular(30),
 
                   child: Card(
-                   margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
-                        // Text(currItem['orgName']),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          currItem['orgName'].toString(),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                           
+                          )
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         SizedBox(
-                          height: 100,
+                          height: 80,
                           child: Image.asset(currItem['image_path']),
                         ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Row(children: [
-                          SizedBox( width: 10),
+                          SizedBox( width: 15),
                           Flexible(
                             child: Text(
                               currItem['itemDesc'], 
                               overflow: TextOverflow.ellipsis, 
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 12
+                                fontSize: 12,
+                                color: Color.fromARGB(166, 0, 0, 0)
                               ),
                             ),
                           ),
                         ],),
                         Text(currItem['quantity'].toString(), 
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            
+                          ),
                         ),
-                        ),
+                        // Text(currItem['address'], 
+                        //   style: const TextStyle(
+                        //     fontSize: 12,
+                        //     color: Colors.grey
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
