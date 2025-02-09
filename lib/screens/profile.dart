@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kindred/firebase_options.dart';
 
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -13,6 +14,8 @@ class Profile extends StatefulWidget {
 void onPressed() {}
 
 class _ProfileState extends State<Profile> {
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
