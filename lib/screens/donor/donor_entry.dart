@@ -26,8 +26,8 @@ class _DonorEntryState extends State<DonorEntry> {
             unselectedLabelColor: Color(0xFF667B68), // Inactive tab text color
             indicatorColor: Color(0xFF667B68),
             tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
+              Tab(text: 'Log in'),
+              Tab(text: 'Sign up'),
             ],
           ),
         ),
