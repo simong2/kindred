@@ -18,6 +18,8 @@ class _ProfileState extends State<Profile> {
 
   late Future<String> _email;
 
+  late Future<int> _donationsCompleted;
+
   @override
   void initState() {
     super.initState();
@@ -27,12 +29,16 @@ class _ProfileState extends State<Profile> {
   void getUserInfo() async {
     _username = FirebaseServices().getDonorUsername();
     _email = FirebaseServices().getDonorEmail();
+    _donationsCompleted = FirebaseServices().getDonationsCompleted();
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String image_path = "";
     return Scaffold(
       backgroundColor: Color(0xF0DDe6d5),
       body: SingleChildScrollView(
@@ -91,17 +97,54 @@ class _ProfileState extends State<Profile> {
                       endIndent: width * 0.05,
                     ),
                     const SizedBox(height: 10),
-                    const UserInfoRow(label: "Rank", value: "??"),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.1),
-                      child: LinearProgressIndicator(
-                        value: 0.5, // Example progress value (70%)
-                        backgroundColor: Colors.grey[300],
-                        color: Colors.blue,
-                        minHeight: 10,
-                      ),
-                    ),
+                    FutureBuilder(
+                        future: _donationsCompleted,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            int rank = 0;
+                            if (snapshot.data! >= 25) {
+                              rank = 4;
+                            } else if (snapshot.data! >= 10) {
+                              rank = 3;
+                            } else if (snapshot.data! >= 5) {
+                              rank = 2;
+                            } else  if (snapshot.data! >= 2) {
+                              rank = 1;
+                            }
+                            String s = "";
+                            switch (rank) {
+                              case 0:
+                                s = "Apprentice: " + snapshot.data.toString() + "/2 Donations"; 
+                                image_path = "assets/img/apprentice.png";
+                                break;
+                              case 1:
+                                s = "Paladin: " + snapshot.data.toString() + "/5 Donations";
+                                image_path = "assets/img/paladin.png";
+                                break;
+                              case 2:
+                                s = "Princess: " + snapshot.data.toString() + "/10 Donations";
+                                image_path = "assets/img/princess.png";
+                                break;
+                              case 3:
+                                s = "Sorcerer: " + snapshot.data.toString() + "/25 Donations";
+                                image_path = "assets/img/sorcerer.png";
+                                break;
+                              case 4:
+                                s = "Grandmaster: You're the best!";
+                                image_path = "assets/img/grandmaster.png";
+                                break;
+                            }
+                            return Column( children: [ UserInfoRow(
+                                label: "Rank", value: s
+                                ), 
+                                SizedBox(height: 50),
+                                Image.asset(image_path),]);
+                          } else {
+                            return const Text("Loading ...");
+                          }
+                        }),
+                        
                     
                   ],
                 ),

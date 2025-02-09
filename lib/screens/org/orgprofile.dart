@@ -33,8 +33,10 @@ class _ProfileState extends State<OrgProfile> {
     return ListView(
       padding: const EdgeInsets.all(5),
       children: [
+        SizedBox(height:15),
         const Row(
           children: [
+            SizedBox(width: 8),
             Icon(
               Icons.info_outline,
               size: 25,
@@ -44,8 +46,10 @@ class _ProfileState extends State<OrgProfile> {
               'About',
               style: TextStyle(fontSize: 20),
             ),
+            
           ],
         ),
+        SizedBox(height: 16),
         FutureBuilder(
           future: _getAllInfo(),
           builder: (context, snapshot) {

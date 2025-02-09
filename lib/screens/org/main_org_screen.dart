@@ -41,10 +41,10 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFDDe6d5),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blue.shade200,
+        backgroundColor: Color(0xFFDDe6d5),
         title: FutureBuilder(
           future: _orgName,
           builder: (context, snapshot) {
@@ -55,7 +55,7 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
               return const Center(child: Text('Error loading data'));
             } else {
               var name = snapshot.data!;
-              return Text(name);
+              return Text(name, style: TextStyle(fontWeight: FontWeight.bold));
             }
           },
         ),
@@ -72,7 +72,8 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
+        backgroundColor: Color(0xFF667B68),
+        foregroundColor: Color(0xF0DDe6d5),
         onPressed: () {
           Navigator.push(
             context,
@@ -87,20 +88,23 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blue.shade200,
+        backgroundColor: Color(0xFFA3B899),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.home_filled),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Profile',
+            icon: Icon(Icons.business_rounded),
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
+        unselectedItemColor: Color(0xFF667B68),
         onTap: _onItemTapped,
+        selectedFontSize: 0, // Increase the size of the selected label
+        unselectedFontSize: 16, // Increase the size of the unselected label
       ),
     );
   }

@@ -3,6 +3,10 @@ import 'package:kindred/screens/donor/main_donor_screen.dart';
 import 'package:kindred/services/firebase_services.dart';
 import 'package:kindred/utils/CustomButton.dart';
 
+const darkGreen = 0xFF667B68;
+const mediumGreen = 0xFFA3B899;
+const lightGreen = 0xFFDDE6D5; //
+
 class LoginDonor extends StatefulWidget {
   const LoginDonor({super.key});
 
@@ -44,15 +48,43 @@ class _LoginDonorState extends State<LoginDonor> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Center(
+                child: Text(
+                  'kindred',
+                  style: TextStyle(
+                    fontSize: 70,
+                    fontWeight: FontWeight.w500,
+                    color: Color(darkGreen), // Text color
+                    shadows: [
+                      Shadow(
+                        offset: Offset(3, 3), // Shadow position
+                        blurRadius: 1.0, // Blur effect
+                        color: Color(mediumGreen), // Shadow color
+                      ),
+                    ],
+                  ),
+                ),
+            ),
             SizedBox(
               width: width / 1.3,
               child: TextFormField(
                 controller: _emailController,
+                cursorColor: Color(darkGreen),
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  fillColor: Colors.white,
+                  prefixIcon: Icon(Icons.email,
+                      color: Color(darkGreen)), // Changed icon color
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                      color: Color(darkGreen)), // Changed label text color
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(darkGreen)), // Default border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(darkGreen),
+                        width: 2.0), // Focused border color and width
+                  ),
                 ),
                 validator: (value) =>
                     value!.isEmpty ? 'Email is required' : null,
@@ -63,9 +95,19 @@ class _LoginDonorState extends State<LoginDonor> {
               width: width / 1.3,
               child: TextFormField(
                 controller: _passwordController,
+                cursorColor: Color(darkGreen),
                 obscureText: showPassword,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.password),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(darkGreen)), // Default border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(darkGreen),
+                        width: 2.0), // Focused border color and width
+                  ),
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -76,7 +118,8 @@ class _LoginDonorState extends State<LoginDonor> {
                   ),
                   fillColor: Colors.white,
                   labelText: 'Password',
-                  border: const OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                      color: Color(darkGreen)), // Changed label text color
                 ),
                 validator: (value) =>
                     value!.isEmpty ? 'Password is required' : null,
