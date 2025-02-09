@@ -78,21 +78,19 @@ class _LoginDonorState extends State<LoginDonor> {
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: showPassword,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock,
-                      color: Color(darkGreen)), // Changed icon color
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.password),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: const Icon(Icons.remove_red_eye),
+                  ),
+                  fillColor: Colors.white,
                   labelText: 'Password',
-                  labelStyle: TextStyle(
-                      color: Color(darkGreen)), // Changed label text color
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color(darkGreen)), // Default border color
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color(darkGreen),
-                        width: 2.0), // Focused border color and width
-                  ),
+                  border: const OutlineInputBorder(),
                 ),
                 validator: (value) =>
                     value!.isEmpty ? 'Password is required' : null,
