@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/services/firebase_services.dart';
 
+const darkGreen = 0xFF667B68;
+const mediumGreen = 0xFFA3B899;
+const lightGreen = 0xFFDDE6D5; // Define the darkGreen color constant
+
 class LoginOrg extends StatefulWidget {
   const LoginOrg({super.key});
 
@@ -46,14 +50,14 @@ class _LoginOrgState extends State<LoginOrg> {
               child: TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email,
-                      color: Color(0xFF667B68)), // Changed icon color
+                    prefixIcon: Icon(Icons.email,
+                      color: Color(darkGreen)), // Changed icon color
                   labelText: 'Email',
                   labelStyle: TextStyle(
-                      color: Color(0xFF667B68)), // Changed label text color
+                      color: Color(darkGreen)), // Changed label text color
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Color(0xFF667B68)), // Default border color
+                        color: Color(darkGreen)), // Default border color
                   ),
                 ),
                 validator: (value) =>
@@ -68,7 +72,7 @@ class _LoginOrgState extends State<LoginOrg> {
                 obscureText: showPassword,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock,
-                      color: Color(0xFF667B68)), // Lock icon color
+                      color: Color(darkGreen)), // Lock icon color
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -77,15 +81,15 @@ class _LoginOrgState extends State<LoginOrg> {
                     },
                     icon: Icon(
                       showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Color(0xFF667B68), // Eye icon color
+                      color: Color(darkGreen), // Eye icon color
                     ),
                   ),
                   labelText: 'Password',
                   labelStyle:
-                      const TextStyle(color: Color(0xFF667B68)), // Label text color
+                      const TextStyle(color: Color(darkGreen)), // Label text color
                   border: const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: Colors.red), // Default border color
+                        BorderSide(color: Color(darkGreen)), // Default border color
                   ),
                 ),
                 validator: (value) =>
@@ -98,12 +102,12 @@ class _LoginOrgState extends State<LoginOrg> {
               height: height * .06,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFA3B899),
-                  foregroundColor: Color(0xFF667B68), // Text color
+                  backgroundColor: Color(mediumGreen),
+                  foregroundColor: Color(darkGreen), // Text color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
                     side: const BorderSide(
-                        color: Colors.red),
+                        color: Color(darkGreen)),
                   ),
                 ),
                 onPressed: () {
