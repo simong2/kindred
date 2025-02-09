@@ -275,6 +275,18 @@ class FirebaseServices {
     );
   }
 
+  // update user rank
+  Future<void> updateDonationRank(String id) async {
+    String uid = _auth.currentUser!.uid;
+    int x = await getDonationsCompleted();
+    int y = x + 1;
+    _db.collection('users').doc(uid).update(
+      {
+        'donationsCompleted': y,
+      },
+    );
+  }
+
   // update specific quantity
   void updateSpecificQuant(String id, int quantity) {
     String uid = _auth.currentUser!.uid;
@@ -292,7 +304,7 @@ class FirebaseServices {
     return ref['quantity'];
   }
 
-  Future<void> userSentDonationRequest(
+  Future userSentDonationRequest(
     String id,
     int amount,
     String imagePath,
@@ -301,12 +313,13 @@ class FirebaseServices {
     String uid = _auth.currentUser!.uid;
     // get prev quantity amount
     int x = await getQuantityPublic(id);
+
     _db.collection('public').doc(id).update(
       {
         'quantity': x - amount,
       },
     );
-
+    await updateDonationRank(id); // update the rank
     // create a pending in the users now
     _db.collection('users').doc(uid).collection('donations').add({
       'image_path': imagePath,
@@ -314,6 +327,9 @@ class FirebaseServices {
       'size': amount,
       'timestamp': FieldValue.serverTimestamp(),
     });
+
+    // update user donation amount
+    // int x = await getDo
   }
 
   // stream the donors history

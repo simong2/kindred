@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kindred/screens/org/add_request_items.dart';
 import 'package:kindred/screens/org/org_home.dart';
@@ -26,7 +27,7 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
 
   late Future<String> _orgName;
 
-  void _getOrgName() {
+  void _getOrgName() async {
     _orgName = FirebaseServices().getOrgName();
     // print('my value changed: $_orgName');
   }
@@ -55,7 +56,10 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
               return const Center(child: Text('Error loading data'));
             } else {
               var name = snapshot.data!;
-              return Text(name, style: TextStyle(fontWeight: FontWeight.bold));
+              return Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              );
             }
           },
         ),
@@ -72,8 +76,8 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF667B68),
-        foregroundColor: Color(0xF0DDe6d5),
+        backgroundColor: const Color(0xFF667B68),
+        foregroundColor: const Color(0xF0DDe6d5),
         onPressed: () {
           Navigator.push(
             context,

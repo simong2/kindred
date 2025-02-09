@@ -22,6 +22,16 @@ class _OrgHomeState extends State<OrgHome> {
           return const Center(
             child: Text('Error loading data'),
           );
+        } else if (snapshot.data!.isEmpty) {
+          return const Center(
+            child: Text(
+              'Create donations requests with add button',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
         } else {
           var result = snapshot.data!;
           // print(result);
@@ -43,41 +53,57 @@ class _OrgHomeState extends State<OrgHome> {
                     ),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: SizedBox(
-                    height: height / 6,
-                    child: Card(
-                      color: Colors.white,
-                      child: Row(
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child:
-                                Image.asset(currItem['image_path'], scale: 2),
-                          ),
-                          const SizedBox(width: 10),
-                          Flexible(
-                            flex: 3,
-                            child: Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                child: SizedBox(
+                  height: height / 6,
+                  child: Card(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: Image.asset(currItem['image_path'], scale: 2),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: 'Description: ',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                                 children: [
-                                  Text(
-                                    currItem['itemDesc'],
-                                  ),
-                                  Text(
-                                    'Quantity: ${currItem['quantity'].toString()}',
+                                  TextSpan(
+                                    text: currItem['itemDesc'],
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
+                                      fontWeight: FontWeight.normal,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          )
-                        ],
-                      ),
+                            RichText(
+                              text: TextSpan(
+                                text: 'Quantity : ',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: currItem['quantity'].toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),
