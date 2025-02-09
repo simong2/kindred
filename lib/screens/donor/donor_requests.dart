@@ -33,6 +33,7 @@ class _DonorRequestsState extends State<DonorRequests> {
 
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Number of columns
+                childAspectRatio: 6/7,
               ),
               itemCount: orgItems.length,
               itemBuilder: (BuildContext context, int index) {
@@ -50,6 +51,11 @@ class _DonorRequestsState extends State<DonorRequests> {
                   borderRadius: BorderRadius.circular(30),
 
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    shadowColor: Colors.black,
+                    elevation: 7,
                     margin: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
@@ -72,7 +78,7 @@ class _DonorRequestsState extends State<DonorRequests> {
                           child: Image.asset(currItem['image_path']),
                         ),
                         const SizedBox(
-                          height: 8,
+                          height: 10,
                         ),
                         Row(children: [
                           SizedBox( width: 15),
@@ -88,9 +94,12 @@ class _DonorRequestsState extends State<DonorRequests> {
                             ),
                           ),
                         ],),
-                        Text(currItem['quantity'].toString(), 
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Text("Qt: " + currItem['quantity'].toString(), 
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                             
                           ),

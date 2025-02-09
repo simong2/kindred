@@ -69,8 +69,8 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
         selectedItemColor: Colors.black,
         unselectedItemColor: Color(0xFF667B68),
         onTap: _onItemTapped,
-        iconSize: 30, // Increase the size of the icons
-        selectedFontSize: 20, // Increase the size of the selected label
+        iconSize: 40, // Increase the size of the icons
+        selectedFontSize: 1, // Increase the size of the selected label
         unselectedFontSize: 16, // Increase the size of the unselected label
       )
       );
