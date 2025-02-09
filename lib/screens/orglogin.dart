@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/main_org_screen.dart';
+import 'package:kindred/screens/orgsign_up.dart';
 import 'package:kindred/screens/sign_up.dart';
 
-class LoginState extends StatefulWidget {
-  const LoginState({super.key});
+class OrgLoginState extends StatefulWidget {
+  const OrgLoginState({super.key});
 
   @override
-  State<LoginState> createState() => _LoginStateState();
+  State<OrgLoginState> createState() => _LoginStateState();
 }
 
-class _LoginStateState extends State<LoginState> {
+class _LoginStateState extends State<OrgLoginState> {
   late TextEditingController _usernameController;
   late TextEditingController _passwordController;
 
@@ -36,7 +38,7 @@ class _LoginStateState extends State<LoginState> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: const Text('Donor'),
+          title: const Text('Organization'),
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Log-in'),
@@ -83,7 +85,10 @@ class _LoginStateState extends State<LoginState> {
                   width: width / 2,
                   height: height * .06,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainOrgScreen()));},
                     child: const Text('Log in'),
                   ),
                 ),
@@ -91,7 +96,7 @@ class _LoginStateState extends State<LoginState> {
             ),
 
             // Sign-up Tab
-            const SignUp(),
+            const OrgSignUp(),
           ],
         ),
       ),
