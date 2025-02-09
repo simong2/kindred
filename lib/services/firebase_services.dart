@@ -77,17 +77,16 @@ class FirebaseServices {
     return ref['email'];
   }
 
-
   // specifc org data edit stuff
   Future<DocumentSnapshot<Map<String, dynamic>>> getSpecifcDonationStuff(
       String id) async {
     return await _db.collection('public').doc(id).get();
+  }
 
   Future<int> getDonationsCompleted() async {
     String uid = _auth.currentUser!.uid;
     final ref = await _db.collection('users').doc(uid).get();
     return ref['donationsCompleted'];
-
   }
 
   // // find if the logged in user is donor or org
