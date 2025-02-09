@@ -38,7 +38,7 @@ class _LoginStateState extends State<LoginState> {
           backgroundColor: Colors.blue, // Solid color instead of gradient
           centerTitle: true, // Center the title
           title: const Text(
-            "CONNECTION", // Uppercase title
+            "JOIN THE DONORS", // Uppercase title
             style: TextStyle(
               color: Colors.white, // White color
               fontSize: 20,

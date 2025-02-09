@@ -37,12 +37,52 @@ class _LoginStateState extends State<OrgLoginState> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text('Organization'),
+          backgroundColor: Color(0xFFF9a825),
+          //fed230 // Solid color instead of gradient
+          centerTitle: true, // Center the title
+          title: const Text(
+            "CONNECT YOUR ORGANISATION", // Uppercase title
+            style: TextStyle(
+              color: Colors.white, // White color
+              fontSize: 20,
+              fontWeight: FontWeight.w600, // Semi-bold for a refined look
+              letterSpacing: 1.2, // Adds slight spacing for better readability
+            ),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.chevron_left,
+                color: Colors.white, size: 32), // Chevron icon in white
+            onPressed: () {
+              Navigator.pop(context); // Go back when pressed
+            },
+          ),
+
           bottom: const TabBar(
+            labelColor: Colors.white, // White text color for selected tab
+            unselectedLabelColor:
+                Colors.white70, // Dimmed white for unselected tabs
+            indicatorColor: Colors.white, // White underline indicator
             tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
+              Tab(
+                child: Text(
+                  'LOG-IN',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2, // Improves readability
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'SIGN-UP',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
