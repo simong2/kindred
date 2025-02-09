@@ -53,9 +53,10 @@ class _OrgHomeState extends State<OrgHome> {
                         children: [
                           Flexible(
                             flex: 2,
-                            child: Image.asset(currItem['image_path'], scale: 2),
+                            child:
+                                Image.asset(currItem['image_path'], scale: 2),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Flexible(
                             flex: 3,
                             child: Expanded(
@@ -68,7 +69,8 @@ class _OrgHomeState extends State<OrgHome> {
                                   Text(
                                     'Quantity: ${currItem['quantity'].toString()}',
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.bold, fontSize: 10),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   ),
                                 ],
                               ),

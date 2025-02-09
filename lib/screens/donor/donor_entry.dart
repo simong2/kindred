@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/screens/donor/donor_register/login.dart';
 import 'package:kindred/screens/donor/donor_register/sign_up.dart';
+import 'package:kindred/screens/donor/donor_requests.dart';
+import 'package:kindred/screens/donor/profile.dart';
 import 'package:kindred/utils/CustomAppBar.dart';
 
 class DonorEntry extends StatefulWidget {
@@ -26,14 +28,15 @@ class _DonorEntryState extends State<DonorEntry> {
             unselectedLabelColor: Color(0xFF667B68), // Inactive tab text color
             indicatorColor: Color(0xFF667B68),
             tabs: [
-              Tab(text: 'Log-in'),
-              Tab(text: 'Sign-up'),
+              Tab(text: 'Log in'),
+              Tab(text: 'Sign up'),
             ],
           ),
         ),
         backgroundColor: Color(0xFFDDE6D5),
         body: const TabBarView(
           children: [
+            //Profile(),
             LoginDonor(),
             SignUpDonor(),
           ],
