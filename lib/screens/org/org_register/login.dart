@@ -44,17 +44,16 @@ class _LoginOrgState extends State<LoginOrg> {
             SizedBox(
               width: width / 1.3,
               child: TextFormField(
-                // I comment this out because it is not needed
-               // controller: _emailController,
+               controller: _emailController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   fillColor: Colors.white,
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
-                // validator: (value) => value!.isEmpty || value == null
-                 //   ? 'Email is required'
-                  //  : null,
+                validator: (value) => value!.isEmpty || value == null
+                   ? 'Email is required'
+                  : null,
               ),
             ),
             const SizedBox(height: 15),

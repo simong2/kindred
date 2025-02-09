@@ -31,46 +31,47 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
     double height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
+      backgroundColor: Color(0xF0DDe6d5),
+      appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Color(0xF0DDe6d5),
-        appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Color(0xF0DDe6d5),
-            title: _selectedIndex == 0 ? 
-            const Text('Home page') : 
-            const Text('Kindred'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  FirebaseServices().signOut();
-                },
-                icon: const Icon(Icons.logout),
-              )
-            ]),
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
+        title: _selectedIndex == 0 ? 
+        const Text("What's Needed?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)) : 
+        const Text('Kindred'),
+        actions: [
+          IconButton(
+          onPressed: () {
+            FirebaseServices().signOut();
+          },
+          icon: const Icon(Icons.logout),
+          )
+        ]),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFFA3B899),
+        items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home, size: 30),
+          label: '',
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xF0A3B899),
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              
-              icon: Icon(Icons.home, weight: 20),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list, weight: 20),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outlined, weight: 20),
-              label: '',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.black,
-          onTap: _onItemTapped,
-        )
+        BottomNavigationBarItem(
+          icon: Icon(Icons.list, size: 30),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outlined, size: 30),
+          label: '',
+        ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.black,
+        onTap: _onItemTapped,
+        iconSize: 40, // Increase the size of the icons
+        selectedFontSize: 20, // Increase the size of the selected label
+        unselectedFontSize: 16, // Increase the size of the unselected label
+      )
       );
-  }
+    }
 }
