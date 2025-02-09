@@ -4,6 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kindred/firebase_options.dart';
 import 'package:kindred/screens/main_donor_screen.dart';
 import 'screens/profile.dart';
+import 'package:kindred/screens/select_who_screen.dart';
+import 'package:kindred/screens/sign_up.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,15 +24,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Kindred',
       // theme: ThemeData(
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
       home: MainDonorScreen(),
+
     );
   }
-
   
 }
