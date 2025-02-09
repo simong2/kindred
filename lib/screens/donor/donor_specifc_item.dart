@@ -70,11 +70,9 @@ class _DonorSpecifcItemState extends State<DonorSpecifcItem> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(height: height * 0.05),
                             Text(
                                 '${data['orgName'].toUpperCase()} left a description: '),
                             Text(data['itemDesc']),
-                            SizedBox(height: height * 0.05),
                             Image.asset(
                               scale: 1.5,
                               data['image_path'],
