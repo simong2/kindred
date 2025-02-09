@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
-=======
-import 'package:kindred/screens/login.dart';
 import 'package:kindred/services/firebase_services.dart';
->>>>>>> Stashed changes
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class LoginState extends StatefulWidget {
+  const LoginState({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<LoginState> createState() => _LoginStateState();
 }
 
-class _SignUpState extends State<SignUp> {
-<<<<<<< Updated upstream
-=======
+class _LoginStateState extends State<LoginState> {
   late TextEditingController _usernameController;
   late TextEditingController _passwordController;
 
@@ -36,71 +30,10 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-<<<<<<< Updated upstream
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(
-            height: height * .35,
-            width: double.infinity,
-            child: Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text(
-                  'Who am I',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30),
-                  ),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Donor'),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      SizedBox(
-                        width: width / 2,
-                        height: height * .06,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Organization'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-=======
     return Form(
       key: _formKey,
       child: Center(
@@ -140,7 +73,6 @@ class _SignUpState extends State<SignUp> {
                     : null,
               ),
             ),
-            const SizedBox(height: 15),
             const SizedBox(height: 40),
             SizedBox(
               width: width / 2,
@@ -148,18 +80,24 @@ class _SignUpState extends State<SignUp> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    FirebaseServices().createUser(
-                      _usernameController.text,
-                      _passwordController.text,
-                    );
+                    print('logging in');
+                    try {
+                      FirebaseServices().logIn(
+                        _usernameController.text,
+                        _passwordController.text,
+                      );
+                      Navigator.pop(context);
+                    } catch (e) {
+                      print('log in failed');
+                      print(e.toString());
+                    }
                   }
                 },
-                child: const Text('Sign up'),
+                child: const Text('Log in'),
               ),
             ),
           ],
         ),
->>>>>>> Stashed changes
       ),
     );
   }
