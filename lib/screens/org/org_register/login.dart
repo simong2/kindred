@@ -50,6 +50,23 @@ class _LoginOrgState extends State<LoginOrg> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Center(
+                child: Text(
+                  'kindred',
+                  style: TextStyle(
+                    fontSize: 70,
+                    fontWeight: FontWeight.w500,
+                    color: Color(darkGreen), // Text color
+                    shadows: [
+                      Shadow(
+                        offset: Offset(3, 3), // Shadow position
+                        blurRadius: 1.0, // Blur effect
+                        color: Color(mediumGreen), // Shadow color
+                      ),
+                    ],
+                  ),
+                ),
+              ),
                 SizedBox(
                   width: width / 1.3,
                   child: TextFormField(
