@@ -39,96 +39,113 @@ class _LoginOrgState extends State<LoginOrg> {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
 
-    return Form(
-      key: _formKey,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: width / 1.3,
-              child: TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email,
-                      color: Color(darkGreen)), // Changed icon color
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                      color: Color(darkGreen)), // Changed label text color
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color(darkGreen)), // Default border color
-                  ),
-                ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Email is required'
-                    : null,
-              ),
-            ),
-            const SizedBox(height: 15),
-            SizedBox(
-              width: width / 1.3,
-              child: TextFormField(
-                controller: _passwordController,
-                obscureText: showPassword,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock,
-                      color: Color(darkGreen)), // Lock icon color
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Color(darkGreen), // Eye icon color
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height / 1.5,
+        ),
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: width / 1.3,
+                  child: TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email,
+                          color: Color(darkGreen)), // Changed icon color
+                      labelText: 'Email',
+                      labelStyle: TextStyle(
+                          color: Color(darkGreen)), // Changed label text color
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(darkGreen)), // Default border color
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(darkGreen),
+                            width: 2.0), // Focused border color and width
+                      ),
                     ),
-                  ),
-                  labelText: 'Password',
-                  labelStyle: const TextStyle(
-                      color: Color(darkGreen)), // Label text color
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color(darkGreen)), // Default border color
+                    validator: (value) => value!.isEmpty || value == null
+                        ? 'Email is required'
+                        : null,
                   ),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? 'Password is required' : null,
-              ),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: width / 2,
-              height: height * .06,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(mediumGreen),
-                  foregroundColor: Color(darkGreen), // Text color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    side: const BorderSide(color: Color(darkGreen)),
+                const SizedBox(height: 15),
+                SizedBox(
+                  width: width / 1.3,
+                  child: TextFormField(
+                    controller: _passwordController,
+                    obscureText: showPassword,
+                    decoration: InputDecoration(
+                      prefixIcon:
+                          const Icon(Icons.lock, color: Color(darkGreen)),
+                      // Lock icon color
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                        icon: Icon(
+                          showPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Color(darkGreen), // Eye icon color
+                        ),
+                      ),
+                      labelText: 'Password',
+                      labelStyle: const TextStyle(
+                          color: Color(darkGreen)), // Label text color
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(darkGreen)), // Default border color
+                      ),
+                    ),
+                    validator: (value) =>
+                        value!.isEmpty ? 'Password is required' : null,
                   ),
                 ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    print('logging in');
-                    try {
-                      FirebaseServices().logOrgIn(
-                        _emailController.text,
-                        _passwordController.text,
-                      );
-                      Navigator.pop(context);
-                    } catch (e) {
-                      print('log in failed');
-                      print(e.toString());
-                    }
-                  }
-                },
-                child: const Text('Log in'),
-              ),
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: width / 2,
+                  height: height * .06,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(mediumGreen),
+                      foregroundColor: Color(darkGreen), // Text color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        side: const BorderSide(
+                          color: Color(darkGreen),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        print('logging in');
+                        try {
+                          FirebaseServices().logOrgIn(
+                            _emailController.text,
+                            _passwordController.text,
+                          );
+                          Navigator.pop(context);
+                        } catch (e) {
+                          print('log in failed');
+                          print(e.toString());
+                        }
+                      }
+                    },
+                    child: const Text('Log in'),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
