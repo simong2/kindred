@@ -73,9 +73,11 @@ class _DonorSpecifcItemState extends State<DonorSpecifcItem> {
                             Text(
                                 '${data['orgName'].toUpperCase()} left a description: '),
                             Text(data['itemDesc']),
-                            Image.asset(
-                              scale: 1.5,
-                              data['image_path'],
+                            SizedBox(
+                              height: height * .35,
+                              child: Image.asset(
+                                data['image_path'],
+                              ),
                             ),
                             SizedBox(height: height * 0.05),
                             Text(

@@ -55,33 +55,36 @@ class _DonorHomeState extends State<DonorHome> {
                     shadowColor: Colors.black,
                     elevation: 7,
                     margin: const EdgeInsets.all(15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: Text(
-                            currItem['orgName'],
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Text(
+                              currItem['orgName'],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Flexible(
-                            flex: 3,
-                            child: Image.asset(currItem['image_path'])),
-                        Flexible(
-                          flex: 1,
-                          child: Text(
-                            "Qt: ${currItem['quantity']}",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          Flexible(
+                              flex: 3,
+                              child: Image.asset(currItem['image_path'])),
+                          Flexible(
+                            flex: 1,
+                            child: Text(
+                              "Qt: ${currItem['quantity']}",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
