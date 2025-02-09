@@ -83,7 +83,7 @@ class _ProfileState extends State<Profile> {
                           }
                         }),
 
-                    const SizedBox(height: 30),
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.1),
                     const ProfileHeading(label: "My Rank"),
                     Divider(
                       color: Colors.black,
@@ -102,17 +102,7 @@ class _ProfileState extends State<Profile> {
                         minHeight: 10,
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.45,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue.shade200,
-                        foregroundColor: Colors.black,
-                      ),
-                      onPressed: onPressed,
-                      child: Text("Sign Out"),
-                    )
+                    
                   ],
                 ),
               ),

@@ -26,7 +26,7 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
               color: Colors.white,
               child: const Center(
                 child: Text(
-                  'Who am I',
+                  'How do you wanna help today?',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -39,12 +39,12 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
             child: SizedBox(
               width: double.infinity,
               child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30),
-                  ),
-                ),
+                //decoration: const BoxDecoration(
+                 // color: Colors.blue,
+                 // borderRadius: BorderRadius.vertical(
+                  //  top: Radius.circular(30),
+                  //),
+                //),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/donor/donor_requests.dart';
 import 'package:kindred/screens/donor/profile.dart';
+import 'package:kindred/screens/donor/donor_home.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class MainDonorScreen extends StatefulWidget {
@@ -12,12 +14,8 @@ class MainDonorScreen extends StatefulWidget {
 class _MainDonorScreenState extends State<MainDonorScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
-    Text(
-      'Index 1: My Requests',
-    ),
+    DonorHome(),
+    DonorRequests(),
     Profile(),
   ];
 
@@ -37,7 +35,9 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
         appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.blue.shade200,
-            title: const Text('Kindred'),
+            title: _selectedIndex == 0 ? 
+            const Text('Home page') : 
+            const Text('Kindred'),
             actions: [
               IconButton(
                 onPressed: () {
