@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseServices().authStateChange,
         builder: (context, snapshot) {
-          print(snapshot);
+          // print(snapshot);
           if (snapshot.hasData) {
             return const MainDonorScreen();
           } else {
