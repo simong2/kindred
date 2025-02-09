@@ -6,6 +6,7 @@ import 'package:kindred/screens/main_donor_screen.dart';
 import 'screens/profile.dart';
 import 'package:kindred/screens/select_who_screen.dart';
 import 'package:kindred/screens/sign_up.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Kindred',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: GoogleFonts.robotoTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
