@@ -79,9 +79,9 @@ class _LoginDonorState extends State<LoginDonor> {
                 controller: _passwordController,
                 obscureText: showPassword,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email,
+                  prefixIcon: Icon(Icons.lock,
                       color: Color(darkGreen)), // Changed icon color
-                  labelText: 'Email',
+                  labelText: 'Password',
                   labelStyle: TextStyle(
                       color: Color(darkGreen)), // Changed label text color
                   border: OutlineInputBorder(
