@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kindred/screens/sign_up.dart';
 
 class RequestFormsListScreen extends StatelessWidget {
@@ -19,7 +20,22 @@ class RequestFormsListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Request Forms List"),
+        title: Text(
+          "Shelters Requests".toUpperCase(), // Uppercase title
+          style: const TextStyle(
+            color: Colors.white, // White color
+            fontSize: 20,
+            fontWeight: FontWeight.w600, // Semi-bold for a refined look
+            letterSpacing: 1.2, // Adds slight spacing for better readability
+            shadows: [
+              Shadow(
+                offset: Offset(1, 1), // Light shadow for depth
+                blurRadius: 3,
+                //color: Colors.black.withOpacity(0.3), // Subtle shadow effect
+              ),
+            ],
+          ),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: ListView.builder(
@@ -117,7 +133,16 @@ class ItemDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Details: ${item['item_name']}"),
+        title: Text(
+          (item['item_name'] ?? "Item Details")
+              .toUpperCase(), // Ensures uppercase text
+          style: GoogleFonts.roboto(
+            color: Colors.white, // White color for contrast
+            fontSize: 20,
+            fontWeight: FontWeight.w600, // Semi-bold for a refined look
+            letterSpacing: 1.2, // Adds slight spacing for better readability
+          ),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Padding(

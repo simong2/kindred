@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kindred/screens/login.dart';
 
 class SelectWhoScreen extends StatefulWidget {
@@ -30,12 +31,22 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'Welcome to Kindred App',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                style: GoogleFonts.roboto(
+                  fontSize: 28, // Slightly larger for better visibility
+                  fontWeight: FontWeight.w600, // Semi-bold for a refined look
+                  color: Colors.white, // Keeps contrast with the background
+                  letterSpacing:
+                      1.2, // Adds slight spacing for better readability
+                  shadows: [
+                    Shadow(
+                      offset: Offset(1, 1), // Light shadow for depth
+                      blurRadius: 3,
+                      color:
+                          Colors.black.withOpacity(0.3), // Subtle shadow effect
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 20),

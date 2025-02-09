@@ -9,9 +9,18 @@ class ItemDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(item['item_name'] ?? 'Item Details'),
-        backgroundColor: Colors.green,
-        centerTitle: true,
+        title: Text(
+          (item['item_name'] ?? 'Item Details')
+              .toUpperCase(), // Ensure uppercase text
+          style: TextStyle(
+            color: Colors.white, // White color for contrast
+            fontSize: 20,
+            fontWeight: FontWeight.w600, // Semi-bold for a refined look
+            letterSpacing: 1.2, // Adds slight spacing for better readability
+          ),
+        ),
+        backgroundColor: Colors.blue, // Same blue as used before
+        centerTitle: true, // Center the title
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
