@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kindred/screens/login.dart';
-import 'package:kindred/screens/organisation/orglogin.dart';
+import 'package:kindred/screens/orglogin.dart';
 
 class SelectWhoScreen extends StatefulWidget {
   const SelectWhoScreen({super.key});
@@ -15,92 +14,75 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF80BFFF), // Light Carolina Blue
-              Color(0xFF0066CC), // Deeper Blue
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome to Kindred App',
-                style: GoogleFonts.roboto(
-                  fontSize: 28, // Slightly larger for better visibility
-                  fontWeight: FontWeight.w600, // Semi-bold for a refined look
-                  color: Colors.white, // Keeps contrast with the background
-                  letterSpacing:
-                      1.2, // Adds slight spacing for better readability
-                  shadows: [
-                    Shadow(
-                      offset: Offset(1, 1), // Light shadow for depth
-                      blurRadius: 3,
-                      color:
-                          Colors.black.withOpacity(0.3), // Subtle shadow effect
-                    ),
-                  ],
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          SizedBox(
+            height: height * .35,
+            width: double.infinity,
+            child: Container(
+              color: Colors.white,
+              child: const Center(
+                child: Text(
+                  'Who am I',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
-              // Expanded image container with dynamic height adjustment
-              Container(
-                width: width, // Full screen width
-                height:
-                    width * (500 / 500), // Adjust height based on aspect ratio
-                child: Image.asset(
-                  'lib/img/kindred-bg-logo.png', // Path to your image
-                  fit: BoxFit.fitWidth, // Ensure the image fits the width
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.deepPurple,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: width / 2,
+                        height: height * .06,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginState()));
+                          },
+                          child: const Text('Donor'),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      SizedBox(
+                        width: width / 2,
+                        height: height * .06,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const OrgLoginState()));
+                          },
+                          child: const Text('Organization'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: width / 3,
-                    height: height * .06,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginState(),
-                          ),
-                        );
-                      },
-                      child: const Text('Donor'),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  SizedBox(
-                    width: width / 3,
-                    height: height * .06,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const OrgLoginState(),
-                          ),
-                        );
-                      },
-                      child: const Text('Organization'),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
