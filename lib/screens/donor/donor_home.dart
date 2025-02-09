@@ -51,6 +51,8 @@ class _DonorHomeState extends State<DonorHome> {
                   borderRadius: BorderRadius.circular(30),
 
                   child: Card(
+                    shadowColor: Colors.black,
+                    elevation: 7,
                     margin: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
