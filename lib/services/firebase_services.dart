@@ -351,4 +351,10 @@ class FirebaseServices {
           ).toList(),
         );
   }
+
+// specifc org data DELETE stuff
+  Future<void> deleteSpecifcOrgStuff(String id) async {
+    String uid = _auth.currentUser!.uid;
+    await _db.collection('orgs').doc(uid).collection('items').doc(id).delete();
+  }
 }

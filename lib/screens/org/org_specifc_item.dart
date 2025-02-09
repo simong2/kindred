@@ -277,7 +277,16 @@ class _OrgSpecifcItemState extends State<OrgSpecifcItem> {
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  FirebaseServices().deleteSpecifcOrgStuff(widget.id);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: const Text('Item has been deleted'),
+                    ),
+                  );
+                },
                 child: const Text('Delete'),
               ),
             ],
