@@ -46,10 +46,15 @@ class _LoginOrgState extends State<LoginOrg> {
               child: TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  fillColor: Colors.white,
+                  prefixIcon: Icon(Icons.email,
+                      color: Color(0xFF667B68)), // Changed icon color
                   labelText: 'Email',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                      color: Color(0xFF667B68)), // Changed label text color
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color(0xFF667B68)), // Default border color
+                  ),
                 ),
                 validator: (value) => value!.isEmpty || value == null
                     ? 'Email is required'
@@ -63,18 +68,26 @@ class _LoginOrgState extends State<LoginOrg> {
                 controller: _passwordController,
                 obscureText: showPassword,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.password),
+                  prefixIcon: const Icon(Icons.lock,
+                      color: Color(0xFF667B68)), // Lock icon color
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
                       });
                     },
-                    icon: const Icon(Icons.remove_red_eye),
+                    icon: Icon(
+                      showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Color(0xFF667B68), // Eye icon color
+                    ),
                   ),
-                  fillColor: Colors.white,
                   labelText: 'Password',
-                  border: const OutlineInputBorder(),
+                  labelStyle:
+                      const TextStyle(color: Color(0xFF667B68)), // Label text color
+                  border: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.red), // Default border color
+                  ),
                 ),
                 validator: (value) => value!.isEmpty || value == null
                     ? 'Password is required'
@@ -86,6 +99,15 @@ class _LoginOrgState extends State<LoginOrg> {
               width: width / 2,
               height: height * .06,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFA3B899),
+                  foregroundColor: Color(0xFF667B68), // Text color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    side: const BorderSide(
+                        color: Colors.red),
+                  ),
+                ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     print('logging in');

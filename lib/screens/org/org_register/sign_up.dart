@@ -101,12 +101,22 @@ class _SignUpState extends State<OrgSignUp> {
             ElevatedButton(
               onPressed: details.onStepContinue,
               child: Text(_index == 5 ? 'Sign Up' : 'Continue'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // Button background color
+                foregroundColor: Colors.red, // Button text color
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
             ),
             const SizedBox(width: 10),
             if (_index > 0)
               OutlinedButton(
                 onPressed: details.onStepCancel,
                 child: const Text('Back'),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.red), // Border color
+                  foregroundColor: Colors.red, // Text color
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
               ),
           ],
         );
@@ -122,7 +132,7 @@ class _SignUpState extends State<OrgSignUp> {
                 controller: _orgNameController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.business),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Organization Name',
                   border: OutlineInputBorder(),
                 ),
@@ -140,7 +150,7 @@ class _SignUpState extends State<OrgSignUp> {
                 controller: _orgAddressController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.house),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Address',
                   border: OutlineInputBorder(),
                 ),
@@ -158,7 +168,7 @@ class _SignUpState extends State<OrgSignUp> {
                 controller: _zipCodeController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.numbers),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Zip code',
                   border: OutlineInputBorder(),
                 ),
@@ -176,7 +186,7 @@ class _SignUpState extends State<OrgSignUp> {
                 controller: _orgPhoneNumberController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.phone),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
                 ),
@@ -194,7 +204,7 @@ class _SignUpState extends State<OrgSignUp> {
                 controller: _emailController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.mail),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
@@ -221,7 +231,7 @@ class _SignUpState extends State<OrgSignUp> {
                     },
                     icon: const Icon(Icons.remove_red_eye),
                   ),
-                  fillColor: Colors.white,
+                  fillColor: Colors.red,
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                 ),
@@ -230,6 +240,7 @@ class _SignUpState extends State<OrgSignUp> {
           ),
         ),
       ],
+      type: StepperType.horizontal,
     );
   }
 }
