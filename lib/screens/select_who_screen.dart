@@ -27,7 +27,7 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                 child: Text(
                   'kindred',
                   style: TextStyle(
-                    color: Color(0xFF667B68),
+                    color: const Color(0xFF667B68),
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
@@ -54,13 +54,13 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         height: height * .06,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFFA3B899), // Button background color
-                            foregroundColor: const Color(0xFF667B68),
+                            backgroundColor:
+                                Color(0xFFA3B899), // Button background color
+                            foregroundColor: Color(0xFF667B68),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0),
                               side: const BorderSide(
-                                  color: Color(0xFF667B68), width: 2),
+                                  color: const Color(0xFF667B68), width: 2),
                             ),
                             textStyle: const TextStyle(fontSize: 18),
                           ),
@@ -80,13 +80,13 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         height: height * .06,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFFA3B899), // Button background color
-                            foregroundColor: const Color(0xFF667B68),
+                            backgroundColor:
+                                Color(0xFFA3B899), // Button background color
+                            foregroundColor: Color(0xFF667B68),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0),
                               side: const BorderSide(
-                                  color: Color(0xFF667B68), width: 2),
+                                  color: const Color(0xFF667B68), width: 2),
                             ),
                             textStyle: const TextStyle(fontSize: 18),
                           ),
