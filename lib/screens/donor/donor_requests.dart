@@ -1,124 +1,130 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kindred/services/firebase_services.dart';
+import 'package:intl/intl.dart';
 
 class DonorRequests extends StatefulWidget {
-  const DonorRequests({Key? key}) : super(key: key);
+  const DonorRequests({super.key});
 
   @override
   State<DonorRequests> createState() => _DonorRequestsState();
 }
 
 class _DonorRequestsState extends State<DonorRequests> {
-  
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xF0DDe6d5),
-      body: StreamBuilder<List<Map<String, dynamic>>>(
-        stream: FirebaseServices().getPublicOrgItem(), // data stream
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No requests are open at the moment."));
-          } else  {
+    double height = MediaQuery.sizeOf(context).height;
+    return StreamBuilder(
+      stream: FirebaseServices().getDonorHistory(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error loading data'),
+          );
+        } else if (snapshot.data!.isEmpty) {
+          return const Center(
+              child: Text(
+            'No donations yet 🙃',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ));
+        } else {
+          var result = snapshot.data!;
 
-            List<Map<String, dynamic>> orgItems = snapshot.data!;
+          return ListView.separated(
+            itemCount: result.length,
+            itemBuilder: (context, index) {
+              final currItem = result[index];
+              print(currItem);
 
-            return GridView.builder(
-
-
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Number of columns
-                childAspectRatio: 6/7,
-              ),
-              itemCount: orgItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                final currItem = orgItems[index];
-
-                return InkWell(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ItemDetails(item: currItem),
-                    //   ),
-                    // );
-                  },
-                  borderRadius: BorderRadius.circular(30),
-
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    shadowColor: Colors.black,
-                    elevation: 7,
-                    margin: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          currItem['orgName'].toString(),
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                           
-                          )
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        SizedBox(
-                          height: 80,
-                          child: Image.asset(currItem['image_path']),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(children: [
-                          SizedBox( width: 15),
-                          Flexible(
-                            child: Text(
-                              currItem['itemDesc'], 
-                              overflow: TextOverflow.ellipsis, 
-                              textAlign: TextAlign.center,
+              return SizedBox(
+                height: height / 6,
+                child: Card(
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: Image.asset(currItem['image_path']),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: 'Org donated to: ',
                               style: const TextStyle(
-                                fontSize: 12,
-                                color: Color.fromARGB(166, 0, 0, 0)
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
+                              children: [
+                                TextSpan(
+                                  text: currItem['orgName'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text("Qt: " + currItem['quantity'].toString(), 
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            
+                          RichText(
+                            text: TextSpan(
+                              text: 'Amount donated : ',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: currItem['size'].toString(),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        // Text(currItem['address'], 
-                        //   style: const TextStyle(
-                        //     fontSize: 12,
-                        //     color: Colors.grey
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                          RichText(
+                            text: TextSpan(
+                              text: 'Donation date : ',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: formatTimeStamp(currItem['timestamp']),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                );
-              },
-            );
-          }
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 10);
+            },
+          );
         }
-      )
-  );
+      },
+    );
   }
+}
+
+String formatTimeStamp(Timestamp ts) {
+  DateTime d = ts.toDate();
+  String format = DateFormat('MM/dd/yy').format(d);
+  return format;
 }
