@@ -31,10 +31,10 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
     double height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xF0DDe6d5),
         appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.blue.shade200,
+            backgroundColor: Color(0xF0DDe6d5),
             title: _selectedIndex == 0 ? 
             const Text('Home page') : 
             const Text('Kindred'),
@@ -50,11 +50,13 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.blue.shade200,
+          backgroundColor: Color(0xF0A3B899),
+          type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
+              
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
@@ -68,6 +70,7 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,
           onTap: _onItemTapped,
-        ));
+        )
+      );
   }
 }

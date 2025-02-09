@@ -11,7 +11,7 @@ class _DonorHomeState extends State<DonorHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Color(0xF0DDe6d5),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 1, // Number of columns

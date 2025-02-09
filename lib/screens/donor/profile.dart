@@ -34,7 +34,7 @@ class _ProfileState extends State<Profile> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xF0DDe6d5),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class _ProfileState extends State<Profile> {
               width: double.infinity,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30),
                   ),
