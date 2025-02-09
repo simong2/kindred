@@ -4,6 +4,10 @@ import 'package:kindred/screens/org/org_entry.dart';
 import 'package:kindred/screens/org/org_register/login.dart';
 import 'package:kindred/utils/CustomButton.dart';
 
+const darkGreen = 0xFF667B68;
+const mediumGreen = 0xFFA3B899;
+const lightGreen = 0xFFDDE6D5;
+
 class SelectWhoScreen extends StatefulWidget {
   const SelectWhoScreen({super.key});
 
@@ -28,9 +32,16 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                 child: Text(
                   'kindred',
                   style: TextStyle(
-                    color: const Color(0xFF667B68),
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 70,
+                    fontWeight: FontWeight.w500,
+                    color: Color(darkGreen), // Text color
+                    shadows: [
+                      Shadow(
+                        offset: Offset(3, 3), // Shadow position
+                        blurRadius: 1.0, // Blur effect
+                        color: Color(mediumGreen), // Shadow color
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -88,6 +99,16 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                             );
                           },
                           child: const Text('Organization'),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: -50,
+                        left: 0,
+                        right: 0,
+                        child: Image.asset(
+                          'assets/img/mushroom.png',
+                          width: double.infinity,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ],
