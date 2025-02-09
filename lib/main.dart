@@ -2,13 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kindred/firebase_options.dart';
-<<<<<<< Updated upstream
 import 'package:kindred/screens/sign_up.dart';
-=======
 import 'package:kindred/screens/main_donor_screen.dart';
 import 'package:kindred/screens/select_who_screen.dart';
 import 'package:kindred/services/firebase_services.dart';
->>>>>>> Stashed changes
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,15 +22,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Kindred',
       // theme: ThemeData(
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
-<<<<<<< Updated upstream
-      home: SignUp(),
-=======
+
       home: StreamBuilder(
         stream: FirebaseServices().authStateChange,
         builder: (context, snapshot) {
@@ -45,7 +40,6 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
->>>>>>> Stashed changes
     );
   }
 }
