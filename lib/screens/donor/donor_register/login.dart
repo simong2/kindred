@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/services/firebase_services.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class LoginDonor extends StatefulWidget {
+  const LoginDonor({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<LoginDonor> createState() => _LoginDonorState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginDonorState extends State<LoginDonor> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  late TextEditingController _usernameController;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -21,7 +20,6 @@ class _SignUpState extends State<SignUp> {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _usernameController = TextEditingController();
   }
 
   @override
@@ -29,37 +27,21 @@ class _SignUpState extends State<SignUp> {
     // TODO: implement dispose
     _emailController.dispose();
     _passwordController.dispose();
-    _usernameController.dispose();
     super.dispose();
   }
+
+  bool showPassword = true;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-
     return Form(
       key: _formKey,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: width / 1.3,
-              child: TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  fillColor: Colors.white,
-                  labelText: 'Username',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) => value!.isEmpty || value == null
-                    ? 'Username is required'
-                    : null,
-              ),
-            ),
-            const SizedBox(height: 15),
             SizedBox(
               width: width / 1.3,
               child: TextFormField(
@@ -80,13 +62,20 @@ class _SignUpState extends State<SignUp> {
               width: width / 1.3,
               child: TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.password),
-                  suffixIcon: Icon(Icons.remove_red_eye),
+                obscureText: showPassword,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.password),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: const Icon(Icons.remove_red_eye),
+                  ),
                   fillColor: Colors.white,
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
                 validator: (value) => value!.isEmpty || value == null
                     ? 'Password is required'
@@ -100,21 +89,20 @@ class _SignUpState extends State<SignUp> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    print('logging in');
                     try {
-                      print('account created');
-                      FirebaseServices().createUser(
+                      FirebaseServices().logDonorIn(
                         _emailController.text,
                         _passwordController.text,
-                        _usernameController.text,
                       );
                       Navigator.pop(context);
                     } catch (e) {
-                      print('account account creation failed');
+                      print('log in failed');
                       print(e.toString());
                     }
                   }
                 },
-                child: const Text('Sign up'),
+                child: const Text('Log in'),
               ),
             ),
           ],

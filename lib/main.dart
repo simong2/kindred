@@ -2,10 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kindred/firebase_options.dart';
-import 'package:kindred/screens/sign_up.dart';
-import 'package:kindred/screens/main_donor_screen.dart';
 import 'package:kindred/screens/select_who_screen.dart';
 import 'package:kindred/services/firebase_services.dart';
+import 'package:kindred/services/user_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +31,9 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseServices().authStateChange,
         builder: (context, snapshot) {
-          // print(snapshot);
+          // print(snapshot.data!.uid);
           if (snapshot.hasData) {
-            return const MainDonorScreen();
+            return UserTypeProvider(uid: snapshot.data!.uid);
           } else {
             return const SelectWhoScreen();
           }

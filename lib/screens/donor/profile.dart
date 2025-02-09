@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kindred/firebase_options.dart';
 import 'package:kindred/services/firebase_services.dart';
 
-
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -25,7 +24,7 @@ class _ProfileState extends State<Profile> {
     getUserInfo();
   }
 
-  void getUserInfo() async{
+  void getUserInfo() async {
     _username = FirebaseServices().getDonorUsername();
     _email = FirebaseServices().getDonorEmail();
   }
@@ -36,11 +35,11 @@ class _ProfileState extends State<Profile> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          
-          Expanded(
-            child: SizedBox(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
               width: double.infinity,
               child: Container(
                 decoration: const BoxDecoration(
@@ -61,27 +60,29 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(height: 8),
                     // const UserInfoRow(label: "Username", value: "??"),
                     FutureBuilder(
-                      future: _username, 
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return UserInfoRow(label: "Username", value: snapshot.data!);
-                        } else {
-                          return const Text("Loading ...");
-                        }
-                      }
-                    ),
+                        future: _username,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return UserInfoRow(
+                                label: "Username", value: snapshot.data!);
+                          } else {
+                            return const Text("Loading ...");
+                          }
+                        }),
                     const SizedBox(height: 10),
                     FutureBuilder(
-                      future: _email, 
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return UserInfoRow(label: "Email", value: snapshot.data!);
-                        } else {
-                          return const Text("Loading ...");
-                        }
-                      }
-                    ),
-                   
+                        future: _email,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return UserInfoRow(
+                                label: "Email", value: snapshot.data!);
+                          } else {
+                            return const Text("Loading ...");
+                          }
+                        }),
+
                     const SizedBox(height: 30),
                     const ProfileHeading(label: "My Rank"),
                     Divider(
@@ -101,46 +102,45 @@ class _ProfileState extends State<Profile> {
                         minHeight: 10,
                       ),
                     ),
-                    SizedBox (
+                    SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.45,
                     ),
                     ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue.shade200,
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: onPressed, 
-                          child: Text("Sign Out"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade200,
+                        foregroundColor: Colors.black,
+                      ),
+                      onPressed: onPressed,
+                      child: Text("Sign Out"),
                     )
                   ],
-                  
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-
 Widget userInfoRow(label) {
   return Row(
-      children: [
-        const SizedBox(width: 40),
-        Text(
-          "$label: ",
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(150, 0, 0, 0),
-          ),
-          textAlign: TextAlign.left,
+    children: [
+      const SizedBox(width: 40),
+      Text(
+        "$label: ",
+        style: const TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(150, 0, 0, 0),
         ),
-      ],
-    );
+        textAlign: TextAlign.left,
+      ),
+    ],
+  );
 }
+
 class ProfileHeading extends StatelessWidget {
   final String label;
 
@@ -168,7 +168,8 @@ class UserInfoRow extends StatelessWidget {
   final String label;
   final String value;
 
-  const UserInfoRow({Key? key, required this.label, required this.value}) : super(key: key);
+  const UserInfoRow({Key? key, required this.label, required this.value})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

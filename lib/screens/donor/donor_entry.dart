@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kindred/screens/login.dart';
-import 'package:kindred/screens/sign_up.dart';
+import 'package:kindred/screens/donor/donor_register/login.dart';
+import 'package:kindred/screens/donor/donor_register/sign_up.dart';
 
 class DonorEntry extends StatefulWidget {
   const DonorEntry({super.key});
@@ -28,8 +28,8 @@ class _DonorEntryState extends State<DonorEntry> {
         backgroundColor: Colors.white,
         body: const TabBarView(
           children: [
-            LoginState(),
-            SignUp(),
+            LoginDonor(),
+            SignUpDonor(),
           ],
         ),
       ),

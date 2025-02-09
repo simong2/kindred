@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kindred/screens/donor_entry.dart';
+import 'package:kindred/screens/donor/donor_entry.dart';
+import 'package:kindred/screens/org/org_entry.dart';
+import 'package:kindred/screens/org/org_register/login.dart';
 
 class SelectWhoScreen extends StatefulWidget {
   const SelectWhoScreen({super.key});
@@ -53,9 +55,10 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const DonorEntry()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DonorEntry()),
+                            );
                           },
                           child: const Text('Donor'),
                         ),
@@ -65,7 +68,13 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                         width: width / 2,
                         height: height * .06,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const OrgEntry()),
+                            );
+                          },
                           child: const Text('Organization'),
                         ),
                       ),
