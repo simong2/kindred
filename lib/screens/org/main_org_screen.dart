@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/org/add_request_items.dart';
+import 'package:kindred/screens/org/org_home.dart';
 import 'package:kindred/screens/org/orgprofile.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class MainOrgScreen extends StatefulWidget {
-  const MainOrgScreen({Key? key}) : super(key: key);
+  const MainOrgScreen({super.key});
 
   @override
   State<MainOrgScreen> createState() => _MainOrgScreenState();
@@ -12,9 +14,7 @@ class MainOrgScreen extends StatefulWidget {
 class _MainOrgScreenState extends State<MainOrgScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Add',
-    ),
+    OrgHome(),
     Text(
       'Index 1: orgs',
     ),
@@ -31,7 +31,7 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
 
   void _getOrgName() {
     _orgName = FirebaseServices().getOrgName();
-    print('my value changed: $_orgName');
+    // print('my value changed: $_orgName');
   }
 
   @override
@@ -51,7 +51,7 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
         title: FutureBuilder(
           future: _orgName,
           builder: (context, snapshot) {
-            print(snapshot.data);
+            // print(snapshot.data);
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Text('Kindred');
             } else if (snapshot.hasError) {
@@ -74,16 +74,27 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddRequestItems(),
+            ),
+          );
+        },
+        child: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.blue.shade200,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Requests',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
