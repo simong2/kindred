@@ -60,8 +60,9 @@ class _LoginOrgState extends State<LoginOrg> {
                         color: Color(darkGreen)), // Default border color
                   ),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? 'Email is required' : null,
+                validator: (value) => value!.isEmpty || value == null
+                    ? 'Email is required'
+                    : null,
               ),
             ),
             const SizedBox(height: 15),

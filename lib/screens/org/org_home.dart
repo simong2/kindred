@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/org/org_specifc_item.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class OrgHome extends StatefulWidget {
@@ -24,42 +25,57 @@ class _OrgHomeState extends State<OrgHome> {
         } else {
           var result = snapshot.data!;
           // print(result);
-          return ListView.builder(
+          return ListView.separated(
             itemCount: result.length,
             itemBuilder: (context, index) {
               final currItem = result[index];
               // print(currItem);
 
-              return SizedBox(
-                height: height / 6,
-                child: Card(
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: Image.asset(currItem['image_path']),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrgSpecifcItem(
+                        id: currItem['id'],
                       ),
-                      Flexible(
-                        flex: 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              currItem['itemDesc'],
-                            ),
-                            Text(
-                              'Quantity: ${currItem['quantity'].toString()}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 30),
-                            ),
-                          ],
+                    ),
+                  );
+                },
+                child: SizedBox(
+                  height: height / 6,
+                  child: Card(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: Image.asset(currItem['image_path']),
                         ),
-                      )
-                    ],
+                        Flexible(
+                          flex: 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                currItem['itemDesc'],
+                              ),
+                              Text(
+                                'Quantity: ${currItem['quantity'].toString()}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 30),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 10);
             },
           );
         }

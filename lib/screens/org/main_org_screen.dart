@@ -15,9 +15,6 @@ class _MainOrgScreenState extends State<MainOrgScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     OrgHome(),
-    Text(
-      'Index 1: orgs',
-    ),
     OrgProfile(),
   ];
 

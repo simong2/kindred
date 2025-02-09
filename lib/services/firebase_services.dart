@@ -157,6 +157,13 @@ class FirebaseServices {
     }
   }
 
+  // get org general info
+  Future<String> getOrgInfo(String info) async {
+    String uid = _auth.currentUser!.uid;
+    final ref = await _db.collection('orgs').doc(uid).get();
+    return ref[info];
+  }
+
   // get org name
   Future<String> getOrgName() async {
     String uid = _auth.currentUser!.uid;
@@ -178,14 +185,18 @@ class FirebaseServices {
         'image_path': imgPath,
         'itemDesc': itemDesc,
         'quantity': q,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
+    String orgName = await getOrgName();
 
     _db.collection('public').add(
       {
+        'orgName': orgName,
         'image_path': imgPath,
         'itemDesc': itemDesc,
         'quantity': q,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -193,10 +204,18 @@ class FirebaseServices {
   // stream the orgs posts
   Stream<List<Map<String, dynamic>>> getOrgItems() {
     String uid = _auth.currentUser!.uid;
-    return _db.collection('orgs').doc(uid).collection('items').snapshots().map(
+    return _db
+        .collection('orgs')
+        .doc(uid)
+        .collection('items')
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
           (snapshot) => snapshot.docs.map(
             (doc) {
-              return doc.data();
+              Map<String, dynamic> x = doc.data();
+              x['id'] = doc.id;
+              return x;
             },
           ).toList(),
         );
@@ -204,13 +223,54 @@ class FirebaseServices {
 
   // stream the public org posts
   Stream<List<Map<String, dynamic>>> getPublicOrgItem() {
-    String uid = _auth.currentUser!.uid;
-    return _db.collection('public').snapshots().map(
+    return _db
+        .collection('public')
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
           (snapshot) => snapshot.docs.map(
             (doc) {
+              // Map<String, dynamic> x = doc.data();
+              // x['id'] = doc.id;
+              // return x;
               return doc.data();
             },
           ).toList(),
         );
+  }
+
+  // specifc org data edit stuff
+  Future<DocumentSnapshot<Map<String, dynamic>>> getSpecifcOrgStuff(
+      String id) async {
+    String uid = _auth.currentUser!.uid;
+
+    return await _db
+        .collection('orgs')
+        .doc(uid)
+        .collection('items')
+        .doc(id)
+        .get();
+  }
+
+  // update specific desc
+  void updateSpecificDesc(String id, String desc) {
+    String uid = _auth.currentUser!.uid;
+
+    _db.collection('orgs').doc(uid).collection('items').doc(id).update(
+      {
+        'itemDesc': desc,
+      },
+    );
+  }
+
+  // update specific quantity
+  void updateSpecificQuant(String id, int quantity) {
+    String uid = _auth.currentUser!.uid;
+
+    _db.collection('orgs').doc(uid).collection('items').doc(id).update(
+      {
+        'quantity': quantity,
+      },
+    );
   }
 }
