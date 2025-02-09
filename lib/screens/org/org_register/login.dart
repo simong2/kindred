@@ -48,9 +48,9 @@ class _LoginOrgState extends State<LoginOrg> {
             SizedBox(
               width: width / 1.3,
               child: TextFormField(
-               controller: _emailController,
+                controller: _emailController,
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.email,
+                  prefixIcon: Icon(Icons.email,
                       color: Color(darkGreen)), // Changed icon color
                   labelText: 'Email',
                   labelStyle: TextStyle(
@@ -60,8 +60,9 @@ class _LoginOrgState extends State<LoginOrg> {
                         color: Color(darkGreen)), // Default border color
                   ),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? 'Email is required' : null,
+                validator: (value) => value!.isEmpty || value == null
+                    ? 'Email is required'
+                    : null,
               ),
             ),
             const SizedBox(height: 15),
@@ -85,11 +86,11 @@ class _LoginOrgState extends State<LoginOrg> {
                     ),
                   ),
                   labelText: 'Password',
-                  labelStyle:
-                      const TextStyle(color: Color(darkGreen)), // Label text color
+                  labelStyle: const TextStyle(
+                      color: Color(darkGreen)), // Label text color
                   border: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color(darkGreen)), // Default border color
+                    borderSide: BorderSide(
+                        color: Color(darkGreen)), // Default border color
                   ),
                 ),
                 validator: (value) =>
@@ -106,8 +107,7 @@ class _LoginOrgState extends State<LoginOrg> {
                   foregroundColor: Color(darkGreen), // Text color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0),
-                    side: const BorderSide(
-                        color: Color(darkGreen)),
+                    side: const BorderSide(color: Color(darkGreen)),
                   ),
                 ),
                 onPressed: () {
