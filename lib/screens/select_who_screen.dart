@@ -31,11 +31,22 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Welcome to Kinder App',
+                'Welcome to Kindred App',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Expanded image container with dynamic height adjustment
+              Container(
+                width: width, // Full screen width
+                height:
+                    width * (500 / 500), // Adjust height based on aspect ratio
+                child: Image.asset(
+                  'lib/img/kindred-bg-logo.png', // Path to your image
+                  fit: BoxFit.fitWidth, // Ensure the image fits the width
                 ),
               ),
               const SizedBox(height: 20),
@@ -48,9 +59,11 @@ class _SelectWhoScreenState extends State<SelectWhoScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginState()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginState(),
+                          ),
+                        );
                       },
                       child: const Text('Donor'),
                     ),
