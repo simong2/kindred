@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kindred/screens/donor/main_donor_screen.dart';
 import 'package:kindred/services/firebase_services.dart';
+import 'package:kindred/utils/CustomButton.dart';
 
 class LoginDonor extends StatefulWidget {
   const LoginDonor({super.key});
@@ -84,7 +86,8 @@ class _LoginDonorState extends State<LoginDonor> {
             SizedBox(
               width: width / 2,
               height: height * .06,
-              child: ElevatedButton(
+              child: CustomButton(
+                label: "Login",
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     print('logging in');
@@ -100,7 +103,6 @@ class _LoginDonorState extends State<LoginDonor> {
                     }
                   }
                 },
-                child: const Text('Log in'),
               ),
             ),
           ],
