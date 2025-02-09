@@ -51,22 +51,22 @@ class _LoginOrgState extends State<LoginOrg> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Center(
-                child: Text(
-                  'kindred',
-                  style: TextStyle(
-                    fontSize: 70,
-                    fontWeight: FontWeight.w500,
-                    color: Color(darkGreen), // Text color
-                    shadows: [
-                      Shadow(
-                        offset: Offset(3, 3), // Shadow position
-                        blurRadius: 1.0, // Blur effect
-                        color: Color(mediumGreen), // Shadow color
-                      ),
-                    ],
+                  child: Text(
+                    'kindred',
+                    style: TextStyle(
+                      fontSize: 70,
+                      fontWeight: FontWeight.w500,
+                      color: Color(darkGreen), // Text color
+                      shadows: [
+                        Shadow(
+                          offset: Offset(3, 3), // Shadow position
+                          blurRadius: 1.0, // Blur effect
+                          color: Color(mediumGreen), // Shadow color
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
                 SizedBox(
                   width: width / 1.3,
                   child: TextFormField(
@@ -114,17 +114,17 @@ class _LoginOrgState extends State<LoginOrg> {
                           showPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: Color(darkGreen), // Eye icon color
+                          color: const Color(darkGreen), // Eye icon color
                         ),
                       ),
                       labelText: 'Password',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                           color: Color(darkGreen)), // Changed label text color
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color(darkGreen)), // Default border color
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color(darkGreen),
                             width: 2.0), // Focused border color and width
@@ -140,8 +140,8 @@ class _LoginOrgState extends State<LoginOrg> {
                   height: height * .06,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(mediumGreen),
-                      foregroundColor: Color(darkGreen), // Text color
+                      backgroundColor: const Color(mediumGreen),
+                      foregroundColor: const Color(darkGreen), // Text color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0),
                         side: const BorderSide(

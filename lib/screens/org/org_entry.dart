@@ -16,8 +16,9 @@ class _OrgEntryState extends State<OrgEntry> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFFA3B899),
-          foregroundColor: Color(0xFF667B68), // Title and back arrow color
+          backgroundColor: const Color(0xFFA3B899),
+          foregroundColor:
+              const Color(0xFF667B68), // Title and back arrow color
           iconTheme: const IconThemeData(size: 28, color: Color(0xFF667B68)),
           title: const Text('Organization'),
           bottom: const TabBar(
@@ -30,7 +31,7 @@ class _OrgEntryState extends State<OrgEntry> {
             ],
           ),
         ),
-        backgroundColor: Color(0xFFDDE6D5),
+        backgroundColor: const Color(0xFFDDE6D5),
         body: const TabBarView(
           children: [
             LoginOrg(),

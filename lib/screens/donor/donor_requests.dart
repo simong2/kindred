@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import 'package:kindred/utils/colors.dart';
 
-
 class DonorRequests extends StatefulWidget {
   const DonorRequests({super.key});
 
@@ -17,7 +16,6 @@ class DonorRequests extends StatefulWidget {
 class _DonorRequestsState extends State<DonorRequests> {
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.sizeOf(context).height;
     return StreamBuilder(
       stream: FirebaseServices().getDonorHistory(),
@@ -30,13 +28,14 @@ class _DonorRequestsState extends State<DonorRequests> {
           );
         } else if (snapshot.data!.isEmpty) {
           return const Center(
-              child: Text(
-            'No donations yet 🙃',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            child: Text(
+              'No donations yet 🙃',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ));
+          );
         } else {
           var result = snapshot.data!;
 
@@ -133,5 +132,3 @@ String formatTimeStamp(Timestamp ts) {
   String format = DateFormat('MM/dd/yy').format(d);
   return format;
 }
-
- 

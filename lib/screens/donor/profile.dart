@@ -32,8 +32,6 @@ class _ProfileState extends State<Profile> {
     _donationsCompleted = FirebaseServices().getDonationsCompleted();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -49,7 +47,6 @@ class _ProfileState extends State<Profile> {
               width: double.infinity,
               child: Container(
                 decoration: const BoxDecoration(
-                  
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(30),
                   ),
@@ -98,54 +95,52 @@ class _ProfileState extends State<Profile> {
                     ),
                     const SizedBox(height: 10),
                     FutureBuilder(
-                        future: _donationsCompleted,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            int rank = 0;
-                            if (snapshot.data! >= 25) {
-                              rank = 4;
-                            } else if (snapshot.data! >= 10) {
-                              rank = 3;
-                            } else if (snapshot.data! >= 5) {
-                              rank = 2;
-                            } else  if (snapshot.data! >= 2) {
-                              rank = 1;
-                            }
-                            String s = "";
-                            switch (rank) {
-                              case 0:
-                                s = "Apprentice: " + snapshot.data.toString() + "/2 Donations"; 
-                                image_path = "assets/img/apprentice.png";
-                                break;
-                              case 1:
-                                s = "Paladin: " + snapshot.data.toString() + "/5 Donations";
-                                image_path = "assets/img/paladin.png";
-                                break;
-                              case 2:
-                                s = "Princess: " + snapshot.data.toString() + "/10 Donations";
-                                image_path = "assets/img/princess.png";
-                                break;
-                              case 3:
-                                s = "Sorcerer: " + snapshot.data.toString() + "/25 Donations";
-                                image_path = "assets/img/sorcerer.png";
-                                break;
-                              case 4:
-                                s = "Grandmaster: You're the best!";
-                                image_path = "assets/img/grandmaster.png";
-                                break;
-                            }
-                            return Column( children: [ UserInfoRow(
-                                label: "Rank", value: s
-                                ), 
-                                SizedBox(height: 50),
-                                Image.asset(image_path),]);
-                          } else {
-                            return const Text("Loading ...");
+                      future: _donationsCompleted,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          int rank = 0;
+                          if (snapshot.data! >= 25) {
+                            rank = 4;
+                          } else if (snapshot.data! >= 10) {
+                            rank = 3;
+                          } else if (snapshot.data! >= 5) {
+                            rank = 2;
+                          } else if (snapshot.data! >= 2) {
+                            rank = 1;
                           }
-                        }),
-                        
-                    
+                          String s = "";
+                          switch (rank) {
+                            case 0:
+                              s = "Apprentice: ${snapshot.data}/2 Donations";
+                              image_path = "assets/img/apprentice.png";
+                              break;
+                            case 1:
+                              s = "Paladin: ${snapshot.data}/5 Donations";
+                              image_path = "assets/img/paladin.png";
+                              break;
+                            case 2:
+                              s = "Princess: ${snapshot.data}/10 Donations";
+                              image_path = "assets/img/princess.png";
+                              break;
+                            case 3:
+                              s = "Sorcerer: ${snapshot.data}/25 Donations";
+                              image_path = "assets/img/sorcerer.png";
+                              break;
+                            case 4:
+                              s = "Grandmaster: You're the best!";
+                              image_path = "assets/img/grandmaster.png";
+                              break;
+                          }
+                          return Column(children: [
+                            UserInfoRow(label: "Rank", value: s),
+                            const SizedBox(height: 50),
+                            Image.asset(image_path),
+                          ]);
+                        } else {
+                          return const Text("Loading ...");
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
