@@ -3,15 +3,17 @@ import 'package:kindred/screens/profile.dart';
 import 'package:kindred/services/firebase_services.dart';
 
 class MainDonorScreen extends StatefulWidget {
-  const MainDonorScreen({super.key});
+  const MainDonorScreen({Key? key}) : super(key: key);
 
   @override
   State<MainDonorScreen> createState() => _MainDonorScreenState();
+
 }
 
 class _MainDonorScreenState extends State<MainDonorScreen> {
-  int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
+
+    int _selectedIndex = 0;
+    static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
     ),
@@ -29,6 +31,9 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width;
+    double height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -41,8 +46,8 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
               FirebaseServices().signOut();
             },
             icon: const Icon(Icons.logout),
-          ),
-        ],
+          )
+        ]
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -55,18 +60,18 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.list),
             label: 'My Requests',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.person_outlined),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
         onTap: _onItemTapped,
-      ),
+      )
     );
   }
 }
