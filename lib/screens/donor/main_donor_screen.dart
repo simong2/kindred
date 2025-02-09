@@ -55,16 +55,16 @@ class _MainDonorScreenState extends State<MainDonorScreen> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.home, weight: 20),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'My Requests',
+              icon: Icon(Icons.list, weight: 20),
+              label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outlined),
-              label: 'Profile',
+              icon: Icon(Icons.person_outlined, weight: 20),
+              label: '',
             ),
           ],
           currentIndex: _selectedIndex,
