@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kindred/screens/donor/donor_register/login.dart';
 import 'package:kindred/screens/donor/donor_register/sign_up.dart';
+import 'package:kindred/screens/donor/donor_requests.dart';
 import 'package:kindred/utils/CustomAppBar.dart';
 
 class DonorEntry extends StatefulWidget {
