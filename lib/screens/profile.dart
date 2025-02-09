@@ -10,11 +10,13 @@ class Profile extends StatefulWidget {
   State<Profile> createState() => _ProfileState();
 }
 
+void onPressed() {}
+
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -31,74 +33,105 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 child: Column(
-                  
                   children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Row(
-                      children: [
-                        SizedBox(
-                          width: 40
-                        ),
-                        Text(
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.left,
-                          "User Details"
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 30),
+                    const ProfileHeading(label: "User Details"),
                     Divider(
                       color: Colors.black,
                       indent: width * 0.05,
                       endIndent: width * 0.05,
                     ),
-                    const Row(
-                      children: [
-                        SizedBox(
-                          width: 40
-                        ),
-                        Text(
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,  
-                            color: Color.fromARGB(150, 0, 0, 0),
+                    const SizedBox(height: 8),
+                    const UserInfoRow(label: "Username", value: "??"),
+                    const SizedBox(height: 10),
+                    const UserInfoRow(label: "Email", value: "??"),
+                   
+                    const SizedBox(height: 30),
+                    const ProfileHeading(label: "My Rank"),
+                    Divider(
+                      color: Colors.black,
+                      indent: width * 0.05,
+                      endIndent: width * 0.05,
+                    ),
+                    const SizedBox(height: 10),
+                    const UserInfoRow(label: "Rank", value: "??"),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+                      child: LinearProgressIndicator(
+                        value: 0.5, // Example progress value (70%)
+                        backgroundColor: Colors.grey[300],
+                        color: Colors.blue,
+                        minHeight: 10,
+                      ),
+                    ),
+                    SizedBox (
+                      height: MediaQuery.sizeOf(context).height * 0.45,
+                    ),
+                    ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade200,
+                            foregroundColor: Colors.black,
                           ),
-                          textAlign: TextAlign.left,
-                          "Username: ??"
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height:20,
-                    ),
-                    const Row(
-                      children: [
-                        SizedBox(
-                          width: 40
-                        ),
-                        Text(
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,  
-                            color: Color.fromARGB(150, 0, 0, 0),
-                          ),
-                          textAlign: TextAlign.left,
-                          "Username: ??"
-                        ),
-                      ],
-                    ),
-                    
-                  ]
+                          onPressed: onPressed, 
+                          child: Text("Sign Out"),
+                    )
+                  ],
+                  
                 ),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProfileHeading extends StatelessWidget {
+  final String label;
+
+  const ProfileHeading({Key? key, required this.label}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 40),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.left,
+        ),
+      ],
+    );
+  }
+}
+
+class UserInfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const UserInfoRow({Key? key, required this.label, required this.value}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(width: 40),
+        Text(
+          "$label: $value",
+          style: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(150, 0, 0, 0),
+          ),
+          textAlign: TextAlign.left,
+        ),
+      ],
     );
   }
 }
